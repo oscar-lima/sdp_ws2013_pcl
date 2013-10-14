@@ -1,3 +1,8 @@
+build/
+CMakeFiles/
+bin/
+CMakeCache.txt
+
 # Compiled Object files
 *.slo
 *.lo
@@ -11,3 +16,9 @@
 *.lai
 *.la
 *.a
+
+# MacOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
