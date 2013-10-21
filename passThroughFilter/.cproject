@@ -20,7 +20,6 @@
 <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 <storageModule moduleId="org.eclipse.cdt.core.pathentry">
 <pathentry excluding="**/CMakeFiles/" kind="out" path=""/>
-<pathentry kind="mac" name="DISABLE_OPENNI" path="" value=""/>
 <pathentry kind="mac" name="EIGEN_USE_NEW_STDVECTOR" path="" value=""/>
 <pathentry kind="mac" name="EIGEN_YES_I_KNOW_SPARSE_MODULE_IS_NOT_STABLE_YET" path="" value=""/>
 <pathentry kind="mac" name="FLANN_STATIC" path="" value=""/>
@@ -257,8 +256,9 @@
 <pathentry kind="mac" name="__EXCEPTIONS" path="" value="1"/>
 <pathentry kind="mac" name="_GNU_SOURCE" path="" value="1"/>
 <pathentry include="/usr/include/vtk-5.8" kind="inc" path="" system="true"/>
-<pathentry include="/opt/ros/groovy/include/pcl-1.6" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/pcl-1.7" kind="inc" path="" system="true"/>
 <pathentry include="/usr/include/eigen3" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/openni" kind="inc" path="" system="true"/>
 <pathentry include="/opt/ros/groovy/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/include/qhull" kind="inc" path="" system="true"/>
 <pathentry include="/home/shehzad/catkin_wstest/devel/include" kind="inc" path="" system="true"/>
@@ -273,6 +273,13 @@
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
 <buildTargets>
+<target name=": edit_cache" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>edit_cache</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
 <target name="[exe] passthrough" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
@@ -289,14 +296,14 @@
 </target>
 <target name="Build" path="[Targets]/[exe] passthrough" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-C "/home/shehzad/PCL_Repository/sdp_ws2013_pcl/PCLAgentification/passThroughFIlter" -j8</buildArguments>
+<buildArguments>-C "/home/shehzad/PCL_Repository/sdp_ws2013_pcl/passThroughFilter" -j8</buildArguments>
 <buildTarget>passthrough</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name="Clean" path="[Targets]/[exe] passthrough" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
-<buildArguments>-E chdir "/home/shehzad/PCL_Repository/sdp_ws2013_pcl/PCLAgentification/passThroughFIlter" "/usr/bin/cmake" -P "CMakeFiles/passthrough.dir/cmake_clean.cmake"</buildArguments>
+<buildArguments>-E chdir "/home/shehzad/PCL_Repository/sdp_ws2013_pcl/passThroughFilter" "/usr/bin/cmake" -P "CMakeFiles/passthrough.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
@@ -322,24 +329,24 @@
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] passthrough.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] src/passthrough.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>passthrough.cpp.o</buildTarget>
+<buildTarget>src/passthrough.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] passthrough.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] src/passthrough.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>passthrough.cpp.i</buildTarget>
+<buildTarget>src/passthrough.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] passthrough.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] src/passthrough.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>passthrough.cpp.s</buildTarget>
+<buildTarget>src/passthrough.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
