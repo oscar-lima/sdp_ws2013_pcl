@@ -1,3 +1,4 @@
+.metadata/
 build/
 CMakeFiles/
 bin/
@@ -16,6 +17,12 @@ CMakeCache.txt
 *.lai
 *.la
 *.a
+
+Eclipse project files
+.cproject
+.project
+cmake_install.cmake
+Makefile
 
 # MacOS files
 .DS_Store
