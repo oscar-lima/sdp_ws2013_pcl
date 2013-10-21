@@ -5,6 +5,7 @@ bin/
 CMakeCache.txt
 
 # Compiled Object files
+*.exe
 *.slo
 *.lo
 *.o
