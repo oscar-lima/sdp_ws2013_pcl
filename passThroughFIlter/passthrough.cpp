@@ -2,6 +2,8 @@
 #include <pcl/point_types.h>
 #include <pcl/filters/passthrough.h>
 
+
+void filter_Passthrough(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest ,const char* filter_axis,float range_min,float range_max);
 int main (int argc, char** argv)
 {
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
@@ -25,13 +27,7 @@ int main (int argc, char** argv)
                         << cloud->points[i].y << " " 
                         << cloud->points[i].z << std::endl;
 
-  // Create the filtering object
-	  pcl::PassThrough<pcl::PointXYZ> pass;
-	  pass.setInputCloud (cloud);
-	  pass.setFilterFieldName ("z");
-	  pass.setFilterLimits (0.0, 1.0);
-	  //pass.setFilterLimitsNegative (true);
-	  pass.filter (*cloud_filtered);
+  filter_Passthrough(cloud,cloud_filtered,"z",0.0,1.0);
 
   std::cerr << "Cloud after filtering: " << std::endl;
   for (size_t i = 0; i < cloud_filtered->points.size (); ++i)
@@ -40,4 +36,15 @@ int main (int argc, char** argv)
                         << cloud_filtered->points[i].z << std::endl;
 
   return (0);
+}
+
+void filter_Passthrough(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest ,const char* filter_axis,float range_min,float range_max)
+{
+	// Create the filtering object
+	  pcl::PassThrough<pcl::PointXYZ> pass;
+	  pass.setInputCloud(src);
+	  pass.setFilterFieldName(filter_axis);
+	  pass.setFilterLimits(range_min, range_max);
+	  //pass.setFilterLimitsNegative(true);
+	  pass.filter(*dest);
 }
