@@ -8,5 +8,5 @@ include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
-add_executable (pclViewer pclViewer.cpp)
+add_executable (pclViewer src/pclViewer.cpp)
 target_link_libraries (pclViewer ${PCL_LIBRARIES})
