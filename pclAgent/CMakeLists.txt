@@ -8,5 +8,5 @@ include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
-add_executable (pclAgent src/pclAgent.cpp)
+add_executable (pclAgent src/pclAgent.cpp src/PCDReadWrite.cpp)
 target_link_libraries (pclAgent ${PCL_LIBRARIES})
