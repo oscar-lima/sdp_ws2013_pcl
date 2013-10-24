@@ -20,7 +20,7 @@
 			  pass.filter(*dest);
 	}
 
-	void filter_voxel(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest ,float lx,float ly,float lz){
+	void filter_Downsampling(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest ,float lx,float ly,float lz){
 
 		  pcl::VoxelGrid<pcl::PointXYZ> sor;
 		  sor.setInputCloud (src);
