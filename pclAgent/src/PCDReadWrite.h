@@ -25,7 +25,7 @@ class PCDReadWrite
 	PCDReadWrite(string providedFileName);
 
 	void read();
-	void write(float x, float y, float z);
+	void write();
 
 	private:
 
