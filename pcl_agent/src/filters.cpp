@@ -20,11 +20,12 @@
 			  pass.filter(*dest);
 	}
 
-	void filter_Downsampling(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest ,float lx,float ly,float lz){
+	void Filters::filter_Downsampling(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest ,float voxel_grid_size_x,float voxel_grid_size_y,float voxel_grid_size_z){
 
 		  pcl::VoxelGrid<pcl::PointXYZ> sor;
 		  sor.setInputCloud (src);
-		  sor.setLeafSize(lx, ly, lz);
+		  sor.setLeafSize(voxel_grid_size_x, voxel_grid_size_y, voxel_grid_size_z);
 		  sor.filter (*dest);
 	}
+	
 
