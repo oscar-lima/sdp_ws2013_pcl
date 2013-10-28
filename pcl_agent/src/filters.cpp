@@ -5,10 +5,6 @@
 
 #include "filters.h"
 
-    Filters::Filters(){
-
-    }
-
 	void Filters::filter_Passthrough(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest ,const char* filter_axis,float range_min,float range_max)
 	{
 			// Create the filtering object
