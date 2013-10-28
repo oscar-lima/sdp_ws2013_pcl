@@ -5,7 +5,7 @@
 
 #include "filters.h"
 
-	void Filters::filter_Passthrough(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest ,const char* filter_axis,float range_min,float range_max)
+	void Filters::passthrough(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest ,const char* filter_axis,float range_min,float range_max)
 	{
 			// Create the filtering object
 			  pcl::PassThrough<pcl::PointXYZ> pass;
@@ -16,7 +16,7 @@
 			  pass.filter(*dest);
 	}
 
-	void Filters::filter_Downsampling(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest ,float voxel_grid_size_x,float voxel_grid_size_y,float voxel_grid_size_z){
+	void Filters::downsampling(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest ,float voxel_grid_size_x,float voxel_grid_size_y,float voxel_grid_size_z){
 
 		  pcl::VoxelGrid<pcl::PointXYZ> sor;
 		  sor.setInputCloud (src);

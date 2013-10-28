@@ -49,7 +49,7 @@ int main(int argc, char** argv)
   while(!viewer.wasStopped()){
     viewer.showCloud(cloud);
     sleep(3);
-    Filters::filter_Downsampling(cloud, cloud, 0.01f, 0.01f, 0.01f);
+    Filters::downsampling(cloud, cloud, 0.01f, 0.01f, 0.01f);
   }
   //reader.write();
   return 0;
