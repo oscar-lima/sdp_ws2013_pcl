@@ -1,12 +1,12 @@
 /*
- * Visualization.h
+ * cloud_viewer.h
  *
  *  Created on: Oct 23, 2013
- *      Author: iuriaa
+ *      Author: Iuri Andrade
  */
 
-#ifndef AGENTVIEWER_H_
-#define AGENTVIEWER_H_
+#ifndef CLOUDVIEWER_H_
+#define CLOUDVIEWER_H_
 
 #include <iostream>
 #include <boost/thread/thread.hpp>
@@ -16,13 +16,13 @@
 #include <pcl/visualization/pcl_visualizer.h>
 #include <pcl/console/parse.h>
 
-class AgentViewer {
+class CloudViewer {
 public:
-	AgentViewer(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud);
-	//virtual ~AgentViewer();
+	CloudViewer(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud);
+	//virtual ~CloudViewer();
 private:
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> simpleVis(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud);
-	boost::shared_ptr<pcl::visualization::PCLVisualizer> customColourVis (pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud);
+	boost::shared_ptr<pcl::visualization::PCLVisualizer> customColourVis(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud);
 };
 
-#endif /* VISUALIZATION_H_ */
+#endif /* CLOUDVIEWER_H_ */

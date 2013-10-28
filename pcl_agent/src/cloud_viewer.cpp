@@ -1,13 +1,13 @@
 /*
- * Visualization.cpp
+ * cloud_viewer.cpp
  *
  *  Created on: Oct 23, 2013
- *      Author: iuriaa
+ *      Author: Iuri Andrade
  */
 
-#include "AgentViewer.h"
+#include "cloud_viewer.h"
 
-AgentViewer::AgentViewer(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud) {
+CloudViewer::CloudViewer(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud) {
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer;
 	viewer = simpleVis(cloud);
 	while (!viewer->wasStopped()) {
@@ -17,7 +17,7 @@ AgentViewer::AgentViewer(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud) {
 }
 
 
-boost::shared_ptr<pcl::visualization::PCLVisualizer> AgentViewer::customColourVis (pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud)
+boost::shared_ptr<pcl::visualization::PCLVisualizer> CloudViewer::customColourVis (pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud)
 {
   // --------------------------------------------
   // -----Open 3D viewer and add point cloud-----
@@ -32,11 +32,11 @@ boost::shared_ptr<pcl::visualization::PCLVisualizer> AgentViewer::customColourVi
   return (viewer);
 }
 
-/*Visualization::~AgentViewer() {
+/*Visualization::~CloudViewer() {
 	// TODO Auto-generated destructor stub
 }*/
 
-boost::shared_ptr<pcl::visualization::PCLVisualizer> AgentViewer::simpleVis(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud) {
+boost::shared_ptr<pcl::visualization::PCLVisualizer> CloudViewer::simpleVis(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud) {
 	// --------------------------------------------
 	// -----Open 3D viewer and add point cloud-----
 	// --------------------------------------------

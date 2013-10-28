@@ -3,7 +3,7 @@
 #include <pcl/filters/voxel_grid.h>
 
 
-#include "Filters.h"
+#include "filters.h"
 
     Filters::Filters(){
 

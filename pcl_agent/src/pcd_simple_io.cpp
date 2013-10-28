@@ -5,7 +5,7 @@
  *      Author: Oscar Lima
  */
 
-#include "PCDSimpleIO.h"
+#include "pcd_simple_io.h"
 
 PCDSimpleIO::PCDSimpleIO()
 {

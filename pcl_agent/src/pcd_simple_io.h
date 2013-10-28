@@ -1,8 +1,8 @@
 /*
- * PCDSimpleIO.h
+ * pcd_simple_io.h
  *
  *  Created on: Oct 23, 2013
- *      Author: oscar
+ *      Author: Oscar Lima
  */
 
 #include <iostream>

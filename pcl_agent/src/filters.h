@@ -2,7 +2,7 @@
  * Filters.h
  *
  *  Created on: Oct 23, 2013
- *      Author: shehzad
+ *      Author: Shehzad Ahmed
  */
 
 #ifndef FILTERS_H_

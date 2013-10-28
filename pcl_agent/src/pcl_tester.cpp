@@ -2,7 +2,7 @@
 #include <iostream>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
-#include "AgentViewer.h"
+#include "cloud_viewer.h"
 
 int main(int argc, char** argv)
 {
@@ -25,7 +25,7 @@ int main(int argc, char** argv)
               << " " << cloud->points[i].z << std::endl;
 
 
-  AgentViewer v(cloud);
+  CloudViewer v(cloud);
   return 0;
 }
 */
@@ -42,8 +42,8 @@ int main(int argc, char** argv)
 #include <cstdlib>
 using namespace std;
 
-#include "PCDSimpleIO.h"
-#include "AgentViewer.h"
+#include "pcd_simple_io.h"
+#include "cloud_viewer.h"
 
 int main(int argc, char** argv)
 {
@@ -65,11 +65,11 @@ int main(int argc, char** argv)
   {
     case 0:	cout << "Not a valid option";
       break;
-    case 1:	AgentViewer viewer(reader.read("../../data/pcd_files/table_scene_lms400.pcd"));
+    case 1:	CloudViewer viewer(reader.read("../../data/pcd_files/table_scene_lms400.pcd"));
       break;
-    case 2:	AgentViewer viewer(reader.read("../../data/pcd_files/kitchen.pcd"));
+    case 2:	CloudViewer viewer(reader.read("../../data/pcd_files/kitchen.pcd"));
       break;
-    case 3:	AgentViewer viewer(reader.read("../../data/pcd_files/table_scene_lms400_downsampled.pcd"));
+    case 3:	CloudViewer viewer(reader.read("../../data/pcd_files/table_scene_lms400_downsampled.pcd"));
       break;
     case 4:	cout << "Under construction";
       break;
@@ -77,8 +77,8 @@ int main(int argc, char** argv)
       break;
   }
   */
-  AgentViewer viewer(reader.read("../../data/pcd_files/table_scene_lms400.pcd"));
-  AgentViewer viewer2(reader.read("../../data/pcd_files/table_scene_lms400_downsampled.pcd"));
+  CloudViewer viewer(reader.read("../../data/pcd_files/table_scene_lms400.pcd"));
+  CloudViewer viewer2(reader.read("../../data/pcd_files/table_scene_lms400_downsampled.pcd"));
   //reader.write();
   return 0;
 }
