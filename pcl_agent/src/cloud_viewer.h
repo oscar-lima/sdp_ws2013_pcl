@@ -18,11 +18,11 @@
 
 class CloudViewer {
 public:
-	CloudViewer(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud);
-	//virtual ~CloudViewer();
-private:
+	CloudViewer();
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> simpleVis(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud);
-	boost::shared_ptr<pcl::visualization::PCLVisualizer> customColourVis(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud);
+	//boost::shared_ptr<pcl::visualization::PCLVisualizer> customColourVis(pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud);
+//private:
+//	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer;
 };
 
 #endif /* CLOUDVIEWER_H_ */
