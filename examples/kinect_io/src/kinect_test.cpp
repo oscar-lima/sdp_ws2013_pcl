@@ -4,39 +4,39 @@
  class SimpleOpenNIViewer
  {
    public:
-     SimpleOpenNIViewer () : viewer ("PCL OpenNI Viewer") {}
+     SimpleOpenNIViewer() : viewer("PCL OpenNI Viewer") {}
 
-     void cloud_cb_ (const pcl::PointCloud<pcl::PointXYZ>::ConstPtr &cloud)
+     void cloud_cb_(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr &cloud)
      {
        if (!viewer.wasStopped())
-         viewer.showCloud (cloud);
+         viewer.showCloud(cloud);
      }
 
-     void run ()
+     void run()
      {
        pcl::Grabber* interface = new pcl::OpenNIGrabber();
 
-       boost::function<void (const pcl::PointCloud<pcl::PointXYZ>::ConstPtr&)> f =
-         boost::bind (&SimpleOpenNIViewer::cloud_cb_, this, _1);
+       boost::function<void(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr&)> f =
+         boost::bind(&SimpleOpenNIViewer::cloud_cb_, this, _1);
 
-       interface->registerCallback (f);
+       interface->registerCallback(f);
 
-       interface->start ();
+       interface->start();
 
        while (!viewer.wasStopped())
        {
-         boost::this_thread::sleep (boost::posix_time::seconds (1));
+         boost::this_thread::sleep (boost::posix_time::seconds(1));
        }
 
-       interface->stop ();
+       interface->stop();
      }
 
      pcl::visualization::CloudViewer viewer;
  };
 
- int main ()
+ int main()
  {
    SimpleOpenNIViewer v;
-   v.run ();
+   v.run();
    return 0;
  }
