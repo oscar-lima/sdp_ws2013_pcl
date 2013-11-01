@@ -25,7 +25,7 @@ class PCDSimpleIO
 	PCDSimpleIO(string providedFileName);
 
 	//void read();
-	pcl::PointCloud<pcl::PointXYZ>::Ptr read(string path_and_filename);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr get_cloud(string path_and_filename);
 	void write();
 
 	private:

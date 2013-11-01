@@ -6,10 +6,11 @@
  */
 
 #include "pcd_simple_io.h"
+using namespace std;
 
 PCDSimpleIO::PCDSimpleIO()
 {
-	//fileName = defaultFileName;
+	//fileName = ErrorFileName;
 	PCDSimpleIO::fileName = "test_pcd.pcd";
 }
 
@@ -18,24 +19,23 @@ PCDSimpleIO::PCDSimpleIO(string providedFileName)
 	PCDSimpleIO::fileName = providedFileName;
 }
 
-pcl::PointCloud<pcl::PointXYZ>::Ptr PCDSimpleIO::read(string path_and_filename)
+pcl::PointCloud<pcl::PointXYZ>::Ptr PCDSimpleIO::get_cloud(string path_and_filename)
 {
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 
   //if (pcl::io::loadPCDFile<pcl::PointXYZ> ("../data/pcd_files/"+ fileName, *cloud) == -1) //* load the file
   if (pcl::io::loadPCDFile<pcl::PointXYZ> (path_and_filename, *cloud) == -1) //* load the file
   {
-    cout << "Error : Could not read pcd file";
+    cout << "\nError : Could not read pcd file\nDid you miss to type the .pcd extension?\n\n";
     //PCL_ERROR ("Couldn't read file %s \n", fileName);
     
     pcl::io::loadPCDFile<pcl::PointXYZ> ("../../data/pcd_files/test_pcd.pcd", *cloud); //error, load something
     return cloud;
   }
   
-  std::cout << "Loaded "
-	    << cloud->width * cloud->height
-	    << " data points from"+ fileName +" with the following fields: "
-	    << std::endl;
+  std::cout << "\nLoaded "
+			<< cloud->width * cloud->height
+			<< " data points from "+ path_and_filename +"\n";
 
 /*
   for (size_t i = 0; i < cloud->points.size (); ++i)
