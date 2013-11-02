@@ -35,34 +35,36 @@ int main(int argc, char** argv)
   int option = 0;
   string file_name = pcd_example;
   point_cloud cloud;
-  pcl::visualization::CloudViewer viewer("Simple Cloud Viewer");
+  SimpleOpenNIViewer kinect;
+  //pcl::visualization::CloudViewer viewer("Simple Cloud Viewer");
   
   
   cout<< "\n::Welcome to pointcloud tester::\n\n";
   
-  while(!viewer.wasStopped ())
+  while(1)
   {
 	  menu();
 	  cin >> option;
 	  switch(option)
 	  { 
 		case 1:
+				
 				cloud = cloud_reader.get_cloud("../../data/pcd_files/table.pcd");
 				//visualize_pcd(cloud);
-				viewer.showCloud(cloud);		
+				kinect.viewer.showCloud(cloud);		
 				break;
 		case 2:
 				//cloud = reader.read("../../data/pcd_files/kitchen.pcd");
 				{
 					//file_name = ask_for_file_name();
 					cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
-					viewer.showCloud(cloud);
+					kinect.viewer.showCloud(cloud);
 				} 
 		break;
 			
 		case 3:
 				{
-					SimpleOpenNIViewer kinect;
+					//SimpleOpenNIViewer kinect;
 					kinect.run();
 				}
 		break;
@@ -74,7 +76,7 @@ int main(int argc, char** argv)
 						
 					Filters::downsampling(cloud, cloud, 0.01f, 0.01f, 0.01f);
 					//visualize_pcd(cloud);
-					viewer.showCloud(cloud);
+					kinect.viewer.showCloud(cloud);
 					cout << "\n Cloud filtered.. \n";
 				} 
 		break;
@@ -89,7 +91,7 @@ int main(int argc, char** argv)
 		case 6:		//exit
 				{
 					cout << "\n\nEnd of program";
-					viewer.~CloudViewer();
+					kinect.viewer.~CloudViewer();
 					return 0;
 				} 
 		break;
