@@ -129,8 +129,7 @@ int main(int argc, char** argv)
 		case 6:		//exit
 				{
 					cout << "\n\nEnd of program"<<endl;
-					kinect.viewer.~CloudViewer();
-					return 0;
+					eturn 0;
 				} 
 		break;
 		default:
@@ -148,7 +147,6 @@ int main(int argc, char** argv)
     Filters::downsampling(cloud, cloud, 0.01f, 0.01f, 0.01f);
   }*/
   //reader.write();
-  kinect.viewer.~CloudViewer();
   cout << "End of program";
   return 0;
 }
