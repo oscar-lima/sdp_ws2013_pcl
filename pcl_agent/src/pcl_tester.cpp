@@ -18,17 +18,26 @@ using namespace std;
 #include "filters.h"
 #include "open_ni_viewer.h"
 
+
 typedef pcl::PointCloud<pcl::PointXYZ>::Ptr point_cloud;
 string pcd_example = "table.pcd";
 string pcd_data_folder = "../../data/pcd_files/";
 int sleep_for_x_sec = 0.5;	//helps to do less times the while cicle
-
-
-void menu(void);
-void visualize_pcd(point_cloud cloud);
-string ask_for_file_name();
-point_cloud cloud_to_apply_filter();
 PCDSimpleIO cloud_reader;
+
+void cloud_ranges_find(point_cloud cloud);
+void menu(void);
+string ask_for_file_name();
+
+struct range_axis{
+	float max_x;
+	float min_x;
+	float max_y;
+	float min_y;
+	float max_z;
+	float min_z;
+}range;
+
 
 int main(int argc, char** argv)
 {
@@ -37,14 +46,15 @@ int main(int argc, char** argv)
   point_cloud cloud;
   SimpleOpenNIViewer kinect;
   //pcl::visualization::CloudViewer viewer("Simple Cloud Viewer");
-  
-  
+ 
   cout<< "\n::Welcome to pointcloud tester::\n\n";
   
-  while(1)
+  while(!kinect.viewer.wasStopped())
   {
 	  menu();
+	  
 	  cin >> option;
+
 	  switch(option)
 	  { 
 		case 1:
@@ -52,7 +62,8 @@ int main(int argc, char** argv)
 				cloud = cloud_reader.get_cloud("../../data/pcd_files/table.pcd");
 				//visualize_pcd(cloud);
 				kinect.viewer.showCloud(cloud);		
-				break;
+				
+		break;
 		case 2:
 				//cloud = reader.read("../../data/pcd_files/kitchen.pcd");
 				{
@@ -82,15 +93,39 @@ int main(int argc, char** argv)
 		break;
 		
 		case 5:		//Apply passtrough filter
-				{
-					cout << "Under construction";
+					
+					
+				{	cout << "...........Point Cloud Passthrough Filter process............."<<endl;
+					float range_min = 0.0f;
+					float range_max = 0.0f;
+					char *filteration_axis;
+					if(cloud == 0)
+						cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
+					kinect.viewer.showCloud(cloud);
+					cloud_ranges_find(cloud);
+					cout << "\nSelect the range & Specify the axis of filteration";
+					cout << "\nRange along x-axis:[" << range.min_x << "," << range.max_x<<"]";
+					cout << "\nRange along y-axis:[" << range.min_y << "," << range.max_y<<"]";
+					cout << "\nRange along z-axis:[" << range.min_z << "," << range.max_z<<"]"<<endl;
+						
+					cout << "\nEnter the axis: "; 
+					//cin.getline(filteration_axis, 20);
+					cout << "\nEnter min. range value: "; 
+					cin >> range_min;
+					cout << "\nEnter max .range value: "; 
+					cin >> range_max;
+						
+					Filters::passthrough(cloud, cloud, "y" , range_min, range_max);
+					//visualize_pcd(cloud);
+					kinect.viewer.showCloud(cloud);
+					cout << "\nPoint Cloud is filtered.. \n";
 					
 				} 
 		break;
 		
 		case 6:		//exit
 				{
-					cout << "\n\nEnd of program";
+					cout << "\n\nEnd of program"<<endl;
 					kinect.viewer.~CloudViewer();
 					return 0;
 				} 
@@ -98,8 +133,10 @@ int main(int argc, char** argv)
 		default:
 				cout << "\n\nInvalid option\n\n";
 				break;
-  }
-  option = 0 ;
+	}
+	option = 0 ;
+  
+  
 }
   /*
   while(!viewer.wasStopped()){
@@ -108,30 +145,17 @@ int main(int argc, char** argv)
     Filters::downsampling(cloud, cloud, 0.01f, 0.01f, 0.01f);
   }*/
   //reader.write();
-  
+  kinect.viewer.~CloudViewer();
   cout << "End of program";
   return 0;
 }
 
-void visualize_pcd(point_cloud cloud)
-{
-	pcl::visualization::CloudViewer viewer("Simple Cloud Viewer");
-	viewer.showCloud(cloud);
-	
-	while(!viewer.wasStopped()) sleep(sleep_for_x_sec);
-}
-
-string ask_for_file_name()
+string ask_for_file_name(void)
 {
 	string file_name;
 	cout << "\nPlease enter the file name : ";
 	cin >> file_name;
 	return file_name;
-}
-
-point_cloud cloud_to_apply_filter()
-{
-	return cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
 }
 
 void menu(void){
@@ -143,4 +167,22 @@ void menu(void){
 	<< "4. Apply downsampling filter\n"
 	<< "5. Apply passtrough filter\n"
 	<< "6. Exit.\n\n";
+}
+void cloud_ranges_find(point_cloud cloud){
+
+	 for (size_t i = 0; i < cloud->points.size (); ++i){
+		 if(cloud->points[i].x > range.max_x)
+		    {range.max_x = cloud->points[i].x;}
+		 else if(cloud->points[i].x < range.min_x)
+		   { range.min_x = cloud->points[i].x;}
+		 if(cloud->points[i].y > range.max_y)
+		    {range.max_y = cloud->points[i].y;}
+		 else if(cloud->points[i].y < range.min_y)
+		   { range.min_y= cloud->points[i].y;}
+		 if(cloud->points[i].z > range.max_z)
+		    {range.max_z = cloud->points[i].z;}
+		 else if(cloud->points[i].z < range.min_z)
+		   { range.min_z= cloud->points[i].z;}
+		    
+		}
 }
