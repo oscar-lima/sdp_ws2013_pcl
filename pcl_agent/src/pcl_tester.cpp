@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 				
 				cloud = cloud_reader.get_cloud("../../data/pcd_files/table.pcd");
 				//visualize_pcd(cloud);
-				kinect.viewer.showCloud(cloud);		
+				kinect.viewer.showCloud(cloud);
 				
 		break;
 		case 2:
@@ -98,24 +98,27 @@ int main(int argc, char** argv)
 				{	cout << "...........Point Cloud Passthrough Filter process............."<<endl;
 					float range_min = 0.0f;
 					float range_max = 0.0f;
-					char *filteration_axis;
+					char filtration_axis = 'z';
 					if(cloud == 0)
 						cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
 					kinect.viewer.showCloud(cloud);
 					cloud_ranges_find(cloud);
-					cout << "\nSelect the range & Specify the axis of filteration";
+					cout << "\nSelect the range & Specify the axis of filtration";
 					cout << "\nRange along x-axis:[" << range.min_x << "," << range.max_x<<"]";
 					cout << "\nRange along y-axis:[" << range.min_y << "," << range.max_y<<"]";
 					cout << "\nRange along z-axis:[" << range.min_z << "," << range.max_z<<"]"<<endl;
-						
-					cout << "\nEnter the axis: "; 
-					//cin.getline(filteration_axis, 20);
+
+					do{
+					cout << "\nEnter the axis x, y or z: "; 
+					cin >> filtration_axis;
+					}while(!(filtration_axis == 'x' || filtration_axis == 'y' || filtration_axis == 'z'));
+					
 					cout << "\nEnter min. range value: "; 
 					cin >> range_min;
 					cout << "\nEnter max .range value: "; 
 					cin >> range_max;
-						
-					Filters::passthrough(cloud, cloud, "y" , range_min, range_max);
+					
+					Filters::passthrough(cloud, cloud, new char(filtration_axis) , range_min, range_max);
 					//visualize_pcd(cloud);
 					kinect.viewer.showCloud(cloud);
 					cout << "\nPoint Cloud is filtered.. \n";
@@ -134,7 +137,7 @@ int main(int argc, char** argv)
 				cout << "\n\nInvalid option\n\n";
 				break;
 	}
-	option = 0 ;
+	option = 0;
   
   
 }
@@ -170,7 +173,7 @@ void menu(void){
 }
 void cloud_ranges_find(point_cloud cloud){
 
-	 for (size_t i = 0; i < cloud->points.size (); ++i){
+	 for (size_t i = 0; i < cloud->points.size(); ++i){
 		 if(cloud->points[i].x > range.max_x)
 		    {range.max_x = cloud->points[i].x;}
 		 else if(cloud->points[i].x < range.min_x)
