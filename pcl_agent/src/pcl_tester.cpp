@@ -24,10 +24,12 @@ string pcd_example = "table.pcd";
 string pcd_data_folder = "../../data/pcd_files/";
 int sleep_for_x_sec = 0.5;	//helps to do less times the while cicle
 PCDSimpleIO cloud_reader;
+pcl::visualization::CloudViewer viewer("Cloud Viewer");
 
 void cloud_ranges_find(point_cloud cloud);
 void menu(void);
 string ask_for_file_name();
+void cloud_cb_(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr &cloud);
 
 struct range_axis{
 	float max_x;
@@ -44,12 +46,10 @@ int main(int argc, char** argv)
   int option = 0;
   string file_name = pcd_example;
   point_cloud cloud;
-  SimpleOpenNIViewer kinect;
-  //pcl::visualization::CloudViewer viewer("Simple Cloud Viewer");
- 
+  
   cout<< "\n::Welcome to pointcloud tester::\n\n";
   
-  while(!kinect.viewer.wasStopped())
+  while(!viewer.wasStopped())
   {
 	  menu();
 	  
@@ -58,25 +58,28 @@ int main(int argc, char** argv)
 	  switch(option)
 	  { 
 		case 1:
-				
 				cloud = cloud_reader.get_cloud("../../data/pcd_files/table.pcd");
-				//visualize_pcd(cloud);
-				kinect.viewer.showCloud(cloud);
+				viewer.showCloud(cloud);
 				
 		break;
 		case 2:
-				//cloud = reader.read("../../data/pcd_files/kitchen.pcd");
 				{
-					//file_name = ask_for_file_name();
 					cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
-					kinect.viewer.showCloud(cloud);
+					viewer.showCloud(cloud);
 				} 
 		break;
 			
 		case 3:
 				{
-					//SimpleOpenNIViewer kinect;
-					kinect.run();
+					pcl::Grabber* interface = new pcl::OpenNIGrabber();
+
+					boost::function<void(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr&)> f =
+											boost::bind(&cloud_cb_, _1);
+
+					interface->registerCallback(f);
+
+					interface->start();
+					
 				}
 		break;
 			
@@ -86,8 +89,7 @@ int main(int argc, char** argv)
 						cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
 						
 					Filters::downsampling(cloud, cloud, 0.01f, 0.01f, 0.01f);
-					//visualize_pcd(cloud);
-					kinect.viewer.showCloud(cloud);
+					viewer.showCloud(cloud);
 					cout << "\n Cloud filtered.. \n";
 				} 
 		break;
@@ -101,7 +103,7 @@ int main(int argc, char** argv)
 					char filtration_axis = 'z';
 					if(cloud == 0)
 						cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
-					kinect.viewer.showCloud(cloud);
+					viewer.showCloud(cloud);
 					cloud_ranges_find(cloud);
 					cout << "\nSelect the range & Specify the axis of filtration";
 					cout << "\nRange along x-axis:[" << range.min_x << "," << range.max_x<<"]";
@@ -119,8 +121,7 @@ int main(int argc, char** argv)
 					cin >> range_max;
 					
 					Filters::passthrough(cloud, cloud, new char(filtration_axis) , range_min, range_max);
-					//visualize_pcd(cloud);
-					kinect.viewer.showCloud(cloud);
+					viewer.showCloud(cloud);
 					cout << "\nPoint Cloud is filtered.. \n";
 					
 				} 
@@ -129,7 +130,7 @@ int main(int argc, char** argv)
 		case 6:		//exit
 				{
 					cout << "\n\nEnd of program"<<endl;
-					eturn 0;
+					return 0;
 				} 
 		break;
 		default:
@@ -140,13 +141,6 @@ int main(int argc, char** argv)
   
   
 }
-  /*
-  while(!viewer.wasStopped()){
-    viewer.showCloud(cloud);
-    sleep(3);
-    Filters::downsampling(cloud, cloud, 0.01f, 0.01f, 0.01f);
-  }*/
-  //reader.write();
   cout << "End of program";
   return 0;
 }
@@ -185,5 +179,11 @@ void cloud_ranges_find(point_cloud cloud){
 		 else if(cloud->points[i].z < range.min_z)
 		   { range.min_z= cloud->points[i].z;}
 		    
-		}
+	}
 }
+void cloud_cb_(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr &cloud){
+	if(!viewer.wasStopped()){
+		viewer.showCloud(cloud);
+	}
+}
+
