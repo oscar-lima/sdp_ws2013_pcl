@@ -16,7 +16,7 @@ using namespace std;
 #include "pcd_simple_io.h"
 //#include "cloud_viewer.h"
 #include "filters.h"
-#include "open_ni_viewer.h"
+#include <pcl/io/openni_grabber.h>
 
 
 typedef pcl::PointCloud<pcl::PointXYZ>::Ptr point_cloud;
