@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 
-project(pcl_agent)
+project(pcl_tester)
 
 find_package(catkin REQUIRED
   COMPONENTS
