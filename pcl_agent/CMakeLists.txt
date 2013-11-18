@@ -5,6 +5,7 @@ project(pcl_agent)
 find_package(catkin REQUIRED
   COMPONENTS
 	roscpp
+	roslib
 )
 
 find_package(PCL 1.7 REQUIRED)

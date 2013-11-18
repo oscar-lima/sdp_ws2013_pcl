@@ -4,6 +4,9 @@ CMakeFiles/
 bin/
 CMakeCache.txt
 
+#temporary files
+*.*~
+
 # Compiled Object files
 *.exe
 *.bin
