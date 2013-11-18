@@ -19,11 +19,16 @@ using namespace std;
 //#include "cloud_viewer.h"
 #include "filters.h"
 #include <pcl/io/openni_grabber.h>
-
+#include <ros/package.h>
 
 typedef pcl::PointCloud<pcl::PointXYZ>::Ptr point_cloud;
+
+//std::string pcd_path = std::string::((ros::package::getPath("PKG_name") + "../data").c_str());
+
+std::string pcl_agent_path = ros::package::getPath("pcl_agent");
+
 string pcd_example = "table.pcd";
-string pcd_data_folder = "../../data/pcd_files/";
+string pcd_data_folder = pcl_agent_path + "/../data/pcd_files/";
 int sleep_for_x_sec = 0.5;	//helps to do less times the while cicle
 PCDSimpleIO cloud_reader;
 pcl::visualization::CloudViewer viewer("Cloud Viewer");
@@ -45,6 +50,8 @@ struct range_axis{
 
 int main(int argc, char** argv)
 {
+	//cout << pcd_data_folder + pcd_example;
+	
 	ros::init(argc, argv, "my_ros_node");
 	ros::NodeHandle nh;
 	
@@ -64,7 +71,7 @@ int main(int argc, char** argv)
 	  { 
 		case 1:
 				{
-					cloud = cloud_reader.get_cloud("../../data/pcd_files/table.pcd");
+					cloud = cloud_reader.get_cloud(pcd_data_folder + pcd_example);
 					viewer.showCloud(cloud); //this should not be 2 lines ! ln 68
 				}
 		break;
