@@ -1,0 +1,190 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=12pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{hochschule bonn-rehin-sieg} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge SDP PCL report \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Team members: Iuri Araujo, Shehzad Ahmed, Oscar Lima} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section{Project task description}
+
+Our task for this semester was to understand, and apply different components of PCL (point cloud library) as well as the agentification of the used components.
+\\[10pt]
+Other goals involved in the project were the constructions of the UML diagrams such as class diagram, sequence diagram and state machine.
+\\[10pt]
+This will be done by designing and constructing a useful program, implementing all this mentioned requirements.
+\\[10pt]
+Our program contains a menu which presents the feasible actions such as visualise a point cloud, read a pcd file (point cloud file) and filter application, downsampling or passthrough filter.
+\\[10pt]
+Later on asks the user to select an option so the program can perform the desired action.
+\\[10pt]
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\section{Short description of the work done so far}
+
+First we installed PCL library \footnote{http://pointclouds.org}, then we went through the tutorials. We developed 8 examples:
+\\[10pt]
+
+\begin{itemize}
+  \item pcd\_read  Reads pcd files and prints in console x, y, z coordinates of each point
+  \item pcd\_write - Generates file\_name.pcd files out of a given pointcloud
+  \item pcl\_viewer - Visualize a given pointcloud
+  \item donwsampling - Reduces the size of the cloud computing the centroids of a fixed sized cubes
+  \item passtrough\_filter - cuts, or takes slices out of the cloud around a given axis
+  \item kinect\_io - Visualise live data from microsoft kinect\footnote{http://www.microsoft.com/en-us/kinectforwindows} sensor device
+  \item kinect\_snapshot - Visualise live data from kinect and if user press spacebar then write pcd file
+\end{itemize}
+
+After that we integrate this examples into a main program as described in the task description.
+\\[10pt]
+Finally we generated the UML diagrams of the program. (class, sequence and state machine)
+\\[10pt]
+All the code is public and available trough github website\footnote{https://github.com/mas-group/sdp\_ws2013\_pcl} inside MAS-GROUP repository.
+\\[10pt]
+
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+
+\section{Effort spent on the project}
+
+
+\begin{itemize}
+  \item Each of us spent 7 hours per week (in average) for the project
+  \item Effort was divided into: 
+  \item Understanding pcl library
+  \item pcl implementation
+  \item Bug fixing
+  \item Solving github issues
+  \item Installing kinect driver openni\footnote{http://www.openni.org}
+  \item CMake\footnote{http://www.cmake.org} usage and eclipse\footnote{http://www.eclipse.org} project creation
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\section{Positive experiences that went well in the first phase}
+
+\begin{itemize}
+  \item We got  a general overview understanding of the plc library
+  \item We learn how does the downsampling and passtrought filters works
+  \item We improve our git\footnote{http://git-scm.com} skills on a 3 member project
+  \item We improve our skills in C++ language
+  \item We learn CMake basics
+  \item We got the first insights in ROS\footnote{http://www.ros.org} plc usage
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\section{A list of items in need of improvement}
+
+\begin{itemize}
+  \item There are still some bugs around the program
+  \item Agentification must be improved
+  \item Diagrams are having errors, we need to correct them
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+\section{Goal suggestions for the second phase}
+
+\begin{itemize}
+  \item Current program migration to ROS platform
+  \item Proper agentification of the program
+  \item Segmentation implementation
+  \item Outlier filter implementation
+\end{itemize}
+
+
+%----------------------------------------------------------------------------------------
+
+
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
