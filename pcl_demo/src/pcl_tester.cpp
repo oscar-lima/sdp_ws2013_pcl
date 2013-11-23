@@ -43,7 +43,7 @@ struct range_axis{
 
 int main(int argc, char** argv)
 {
-  int option = 0;
+  char option = 0;
   string file_name = pcd_example;
   point_cloud cloud;
   
@@ -57,19 +57,19 @@ int main(int argc, char** argv)
 
 	  switch(option)
 	  { 
-		case 1:
+		case '1':
 				cloud = cloud_reader.get_cloud("../../data/pcd_files/table.pcd");
 				viewer.showCloud(cloud);
 				
 		break;
-		case 2:
+		case '2':
 				{
 					cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
 					viewer.showCloud(cloud);
 				} 
 		break;
 			
-		case 3:
+		case '3':
 				{
 					pcl::Grabber* interface = new pcl::OpenNIGrabber();
 
@@ -83,7 +83,7 @@ int main(int argc, char** argv)
 				}
 		break;
 			
-		case 4:		//Downsample
+		case '4':		//Downsample
 				{		
 					if(cloud == 0)
 						cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
@@ -94,7 +94,7 @@ int main(int argc, char** argv)
 				} 
 		break;
 		
-		case 5:		//Apply passtrough filter
+		case '5':		//Apply passtrough filter
 					
 					
 				{	cout << "...........Point Cloud Passthrough Filter process............."<<endl;
@@ -127,7 +127,7 @@ int main(int argc, char** argv)
 				} 
 		break;
 		
-		case 6:		//exit
+		case '6':		//exit
 				{
 					cout << "\n\nEnd of program"<<endl;
 					return 0;
