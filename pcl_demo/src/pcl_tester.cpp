@@ -60,13 +60,11 @@ int main(int argc, char** argv)
 		case '1':
 				{
 					cloud = cloud_reader.get_cloud("../../data/pcd_files/table.pcd");
-					viewer.showCloud(cloud);
 				}
 		break;
 		case '2':
 				{
 					cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
-					viewer.showCloud(cloud);
 				} 
 		break;
 			
@@ -81,24 +79,36 @@ int main(int argc, char** argv)
 
 					interface->start();
 					
+					option = 0;
 				}
 		break;
 			
-		case '4':		//Downsample
-				{		
+		case '4':	/*Apply downsampling:
+					 *To apply this filter,width(x),length(y) and height(z) of 3D voxel grid(set of tiny 3D boxes in space) is required
+				 	 */ 
+				{	
+					float voxel_grid_size_x = 0.0f;
+					float voxel_grid_size_y = 0.0f;
+					float voxel_grid_size_z = 0.0f;
+						
 					if(cloud == 0)
 						cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
 						
-					Filters::downsampling(cloud, cloud, 0.01f, 0.01f, 0.01f);
-					viewer.showCloud(cloud);
+					cout << "\nEnter Voxel grid width(x): "; 
+					cin >> voxel_grid_size_x;
+					cout << "\nEnter Voxel_grid length(y): "; 
+					cin >> voxel_grid_size_y;
+					cout << "\nEnter Voxel grid height(z): "; 
+					cin >> voxel_grid_size_z;
+						
+					Filters::downsampling(cloud, cloud, voxel_grid_size_x, voxel_grid_size_x, voxel_grid_size_x);
 					cout << "\n Cloud filtered.. \n";
 				} 
 		break;
 		
 		case '5':	
 					/*Apply passtrough filter:
-					 *To apply this filter,select axis of filteration and range to be sliced
-				 	 * along the specified axis
+					 *To apply this filter,select axis of filteration and range to be sliced along the specified axis.
 				 	 */ 			
 				{	
 					float range_min = 0.0f;
@@ -107,6 +117,7 @@ int main(int argc, char** argv)
 					
 					if(cloud == 0)
 						cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
+					
 					viewer.showCloud(cloud);
 					cloud_ranges_find(cloud);
 					
@@ -125,7 +136,6 @@ int main(int argc, char** argv)
 					cin >> range_max;
 					
 					Filters::passthrough(cloud, cloud, filtration_axis_ptr , range_min, range_max);
-					viewer.showCloud(cloud);
 					cout << "\nPoint Cloud is filtered.. \n";
 					
 				} 
@@ -147,7 +157,6 @@ int main(int argc, char** argv)
 					cin >> StandardDeviationfromMeanDistance;
 					
 					Filters::statisticaloutlierremoval(cloud, cloud, MinNeighborsforMeanDistance, StandardDeviationfromMeanDistance);
-					viewer.showCloud(cloud);
 					cout << "\nPoint Cloud is filtered.. \n";
 				}
 		break;
@@ -170,21 +179,26 @@ int main(int argc, char** argv)
 					cin >> RadiusSearch;
 					
 					Filters::radiusoutlierremoval(cloud, cloud, MinNeighborsInRadius, RadiusSearch);
-					viewer.showCloud(cloud);
 					cout << "\nPoint Cloud is filtered.. \n";
 				}
 		break;
 		
-		case '8':		//exit
+		case '8':	//exit
 				{
 					cout << "\n\nEnd of program"<<endl;
 					return 0;
 				} 
 		break;
 		default:
-				cout << "\n\nInvalid option\n\n";
-				break;
+				{
+					cout << "\n\nInvalid option\n\n";
+					option = 0;
+				}
+		break;
 	}
+	
+	if(option != 0)
+	 viewer.showCloud(cloud);
 	option = 0;
 }
   cout << "End of program";
