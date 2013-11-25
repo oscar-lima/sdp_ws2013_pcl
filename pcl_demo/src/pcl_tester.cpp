@@ -100,7 +100,8 @@ int main(int argc, char** argv)
 				{	cout << "...........Point Cloud Passthrough Filter process............."<<endl;
 					float range_min = 0.0f;
 					float range_max = 0.0f;
-					char filtration_axis = 'z';
+					char filtration_axis[1];
+					
 					if(cloud == 0)
 						cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
 					viewer.showCloud(cloud);
@@ -113,14 +114,17 @@ int main(int argc, char** argv)
 					do{
 					cout << "\nEnter the axis x, y or z: "; 
 					cin >> filtration_axis;
-					}while(!(filtration_axis == 'x' || filtration_axis == 'y' || filtration_axis == 'z'));
+					}while(!(filtration_axis[0] == 'x' || filtration_axis[0] == 'y' || filtration_axis[0] == 'z'));
+					
+					const char *filtration_axis_ptr;
+					filtration_axis_ptr = filtration_axis;
 					
 					cout << "\nEnter min. range value: "; 
 					cin >> range_min;
 					cout << "\nEnter max .range value: "; 
 					cin >> range_max;
 					
-					Filters::passthrough(cloud, cloud, new char(filtration_axis) , range_min, range_max);
+					Filters::passthrough(cloud, cloud, filtration_axis_ptr , range_min, range_max);
 					viewer.showCloud(cloud);
 					cout << "\nPoint Cloud is filtered.. \n";
 					
