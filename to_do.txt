@@ -16,4 +16,4 @@ Future work:
 	- depth color visualization
 
 3. Tune:
-	- downsampling parameters
+	- downsampling parameters(done)
