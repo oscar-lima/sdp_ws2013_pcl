@@ -140,7 +140,7 @@ int main(int argc, char** argv)
 					
 				} 
 		break;
-		case '6':	/*Apply Statistical outliar filter:
+		case '6':	/*Apply Statistical outlier filter:
 				 	*To apply this filter,number of neighobors to consider for Mean distance and standard deviation
 				 	* from mean distance is required
 				 	*/ 
@@ -162,7 +162,7 @@ int main(int argc, char** argv)
 		break;
 		
 		case '7':
-					/*Apply Radius outliar filter:
+					/*Apply Radius outlier filter:
 					 *To apply this filter,number of neighobors to consider for Mean distance and standard deviation
 					 *from mean distance is required
 					 */
@@ -221,8 +221,8 @@ void menu(void){
 	<< "3. View from Kinect\n"
 	<< "4. Apply downsampling filter\n"
 	<< "5. Apply passtrough filter\n"
-	<< "6. Apply Statistical outliar filter\n"
-	<< "7. Apply Radius outliar filter\n"
+	<< "6. Apply Statistical outlier filter\n"
+	<< "7. Apply Radius outlier filter\n"
 	<< "8. Exit.\n\n";
 }
 void cloud_ranges_find(point_cloud cloud){
