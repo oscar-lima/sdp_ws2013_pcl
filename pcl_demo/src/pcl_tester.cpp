@@ -58,9 +58,10 @@ int main(int argc, char** argv)
 	  switch(option)
 	  { 
 		case '1':
-				cloud = cloud_reader.get_cloud("../../data/pcd_files/table.pcd");
-				viewer.showCloud(cloud);
-				
+				{
+					cloud = cloud_reader.get_cloud("../../data/pcd_files/table.pcd");
+					viewer.showCloud(cloud);
+				}
 		break;
 		case '2':
 				{
@@ -94,10 +95,12 @@ int main(int argc, char** argv)
 				} 
 		break;
 		
-		case '5':		//Apply passtrough filter
-					
-					
-				{	cout << "...........Point Cloud Passthrough Filter process............."<<endl;
+		case '5':	
+					/*Apply passtrough filter:
+					 *To apply this filter,select axis of filteration and range to be sliced
+				 	 * along the specified axis
+				 	 */ 			
+				{	
 					float range_min = 0.0f;
 					float range_max = 0.0f;
 					char filtration_axis[1];
@@ -106,10 +109,7 @@ int main(int argc, char** argv)
 						cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
 					viewer.showCloud(cloud);
 					cloud_ranges_find(cloud);
-					cout << "\nSelect the range & Specify the axis of filtration";
-					cout << "\nRange along x-axis:[" << range.min_x << "," << range.max_x<<"]";
-					cout << "\nRange along y-axis:[" << range.min_y << "," << range.max_y<<"]";
-					cout << "\nRange along z-axis:[" << range.min_z << "," << range.max_z<<"]"<<endl;
+					
 
 					do{
 					cout << "\nEnter the axis x, y or z: "; 
@@ -130,8 +130,52 @@ int main(int argc, char** argv)
 					
 				} 
 		break;
+		case '6':	/*Apply Statistical outliar filter:
+				 	*To apply this filter,number of neighobors to consider for Mean distance and standard deviation
+				 	* from mean distance is required
+				 	*/ 
+				{
+					int MinNeighborsforMeanDistance = 0;
+					float StandardDeviationfromMeanDistance = 0.0f;
+					if(cloud == 0)
+						cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
+					viewer.showCloud(cloud);
+					
+					cout << "\nEnter number of neighbors for Mean distance: "; 
+					cin >> MinNeighborsforMeanDistance;
+					cout << "\nEnter standard deviation from Mean distance:"; 
+					cin >> StandardDeviationfromMeanDistance;
+					
+					Filters::statisticaloutlierremoval(cloud, cloud, MinNeighborsforMeanDistance, StandardDeviationfromMeanDistance);
+					viewer.showCloud(cloud);
+					cout << "\nPoint Cloud is filtered.. \n";
+				}
+		break;
 		
-		case '6':		//exit
+		case '7':
+					/*Apply Radius outliar filter:
+					 *To apply this filter,number of neighobors to consider for Mean distance and standard deviation
+					 *from mean distance is required
+					 */
+				{
+					int MinNeighborsInRadius = 0;
+					float RadiusSearch = 0.0f;
+					if(cloud == 0)
+						cloud = cloud_reader.get_cloud(pcd_data_folder + ask_for_file_name());
+					viewer.showCloud(cloud);
+					
+					cout << "\nEnter minimum neighbors in radius: "; 
+					cin >> MinNeighborsInRadius;
+					cout << "\nEnter search radius:"; 
+					cin >> RadiusSearch;
+					
+					Filters::radiusoutlierremoval(cloud, cloud, MinNeighborsInRadius, RadiusSearch);
+					viewer.showCloud(cloud);
+					cout << "\nPoint Cloud is filtered.. \n";
+				}
+		break;
+		
+		case '8':		//exit
 				{
 					cout << "\n\nEnd of program"<<endl;
 					return 0;
@@ -142,8 +186,6 @@ int main(int argc, char** argv)
 				break;
 	}
 	option = 0;
-  
-  
 }
   cout << "End of program";
   return 0;
@@ -165,7 +207,9 @@ void menu(void){
 	<< "3. View from Kinect\n"
 	<< "4. Apply downsampling filter\n"
 	<< "5. Apply passtrough filter\n"
-	<< "6. Exit.\n\n";
+	<< "6. Apply Statistical outliar filter\n"
+	<< "7. Apply Radius outliar filter\n"
+	<< "8. Exit.\n\n";
 }
 void cloud_ranges_find(point_cloud cloud){
 
@@ -182,8 +226,11 @@ void cloud_ranges_find(point_cloud cloud){
 		    {range.max_z = cloud->points[i].z;}
 		 else if(cloud->points[i].z < range.min_z)
 		   { range.min_z= cloud->points[i].z;}
-		    
 	}
+	cout << "\nSelect the range & Specify the axis of filtration";
+	cout << "\nRange along x-axis:[" << range.min_x << "," << range.max_x<<"]";
+	cout << "\nRange along y-axis:[" << range.min_y << "," << range.max_y<<"]";
+	cout << "\nRange along z-axis:[" << range.min_z << "," << range.max_z<<"]"<<endl;
 }
 void cloud_cb_(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr &cloud){
 	if(!viewer.wasStopped()){
