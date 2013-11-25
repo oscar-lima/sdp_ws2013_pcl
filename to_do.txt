@@ -3,7 +3,7 @@ Issues:
 1. When asking for menu input, if you input a letter i.e. r letter, the program crashes
 2. if you call the kinect, nothing can be done further
 3. if you close the window by clicking 'x' button then program crashes
-4. if you try twice the passtrough filter it crashes
+4. if you try twice the passthrough filter it crashes(problem solved)
 
 Future work:
 
