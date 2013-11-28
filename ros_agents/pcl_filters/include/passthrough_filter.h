@@ -17,10 +17,10 @@ class passthroughFilter : public filtersInterface
 public:
 
 	void applyFilter(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest);
-	void setParams(char filter_axis,float range_min,float range_max);
+	void setParams(char *filter_axis,float range_min,float range_max);
 	
 private:
-char filter_axis;
+char *filter_axis;
 float range_min;
 float range_max;
 };

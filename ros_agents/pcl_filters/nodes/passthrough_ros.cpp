@@ -9,7 +9,8 @@ void cloud_cb(point_cloud src_cloud)
 {
  //point_cloud dest_cloud;
   passthroughFilter test;
-   test.setParams('x',0.0,0.5);
+  char *axis("x");
+  test.setParams(axis,0.0,0.5);
   test.applyFilter(src_cloud,src_cloud);
 
   pub.publish(src_cloud); 
