@@ -7,6 +7,9 @@ find_package(catkin REQUIRED
 	roscpp
 	roslib
 )
+add_definitions(-std=gnu++0x)
+
+add_definitions(-Wno-write-strings)
 
 find_package(PCL 1.7 REQUIRED)
 
@@ -15,6 +18,7 @@ catkin_package()
 include_directories(
 	${catkin_INCLUDE_DIRS}
 	${PCL_INCLUDE_DIRS}
+	/usr/include/ni/
 )
 
 add_executable(pcl_tester 
