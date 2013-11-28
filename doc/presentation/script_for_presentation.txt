@@ -1,0 +1,14 @@
+parameters for demo:
+
+load example -> option1
+
+table.pcd -> downsampling : option4, 0.01, 0.01, 0.01
+
+passtrough filter -> axis : x, 0, 0.5
+
+outlier -> otion 6, 50, 1
+
+view from kinect -> option3
+
+exit -> option8
+
