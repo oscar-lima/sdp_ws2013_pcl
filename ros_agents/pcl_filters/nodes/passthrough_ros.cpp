@@ -8,7 +8,7 @@ ros::Publisher pub;
 void cloud_cb(point_cloud src_cloud)
 {
  //point_cloud dest_cloud;
-  passthroughFilter ;
+  passthroughFilter test;
    test.setParams('x',0.0,0.5);
   test.applyFilter(src_cloud,src_cloud);
 
@@ -22,10 +22,10 @@ int main (int argc, char** argv)
   ros::init (argc, argv, "passthrough_ros");
   ros::NodeHandle nh;
   // Create a ROS subscriber for the input point cloud
-  ros::Subscriber sub = nh.subscribe ("pcl_file_reader", 1, cloud_cb);
+  ros::Subscriber sub = nh.subscribe ("cloud", 1, cloud_cb);
 
   //Create a ROS publisher for the output point cloud
- pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("pcl_file_reader", 1);
+ pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("cloud", 1);
 
   ros::spin();
 }

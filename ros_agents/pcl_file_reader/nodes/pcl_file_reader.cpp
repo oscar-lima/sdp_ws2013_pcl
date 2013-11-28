@@ -13,7 +13,7 @@ int main (int argc, char** argv)
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;
 	
 	cloud = cloud_reader.getCloud("table.pcd");
-	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("/cloud", 1);
+	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("cloud", 1);
 		
 	while(pub.getNumSubscribers() == 0 && ros::ok())
 	{
