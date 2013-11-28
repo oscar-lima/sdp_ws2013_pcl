@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 
-project(pcl_agent)
+project(pcl_ros_demo)
 
 find_package(catkin REQUIRED
   COMPONENTS
@@ -21,11 +21,11 @@ include_directories(
 	/usr/include/ni/
 )
 
-add_executable(pcl_tester 
+add_executable(pcl_ros_demo
 	src/pcl_tester.cpp src/cloud_viewer.cpp 
 	src/pcd_simple_io.cpp src/filters.cpp
 )
-target_link_libraries(pcl_tester 
+target_link_libraries(pcl_ros_demo 
 	${catkin_LIBRARIES}
 	${PCL_LIBRARIES}
 )
