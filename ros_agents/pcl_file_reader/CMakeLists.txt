@@ -24,14 +24,14 @@ catkin_package(
                )
 
 include_directories(
-   /include
+   include/
   ${catkin_INCLUDE_DIRS}
   #/opt/ros/hydro/include/
   #/usr/include/pcl-1.7/
    ${EIGEN_INCLUDE_DIRS}
    ${PCL_INCLUDE_DIRS}
-   /src
-   /data
+   src/
+   data/
 )
 
 add_executable(pcl_file_reader nodes/pcl_file_reader.cpp src/pcd_simple_io.cpp
