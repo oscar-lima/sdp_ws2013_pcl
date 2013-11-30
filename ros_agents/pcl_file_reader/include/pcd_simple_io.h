@@ -1,7 +1,7 @@
 /*
- *  pcd_simple_io.h
+ * 	PCL file reader
  *
- *  Created on: Oct 23, 2013
+ *  Created on: Nov 28, 2013
  *  Author: Oscar Lima
  */
 
@@ -9,22 +9,24 @@
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <cstring>
-#include "pcl_ros/point_cloud.h"
-#include <ros/package.h>
+//#include "pcl_ros/point_cloud.h"
 
 using namespace std;
 
 class PCDSimpleIO
 {
 	public:
-
-	std::string pcd_data_folder;
-		
-	PCDSimpleIO();
-	pcl::PointCloud<pcl::PointXYZ>::Ptr getCloud(string filename);
-	//Parameters: data folder, filename
 	
-	private:
+	string file_name;
+	string pcd_data_folder;
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;
 
-	string fileName;
+	PCDSimpleIO(string _pcd_data_folder, string _file_name);
+	bool getCloud(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr getCloud2(bool &success);
+	void setFileName(string _file_name);
+	string getFileName();
+	void SetPcdDataFolder(string _pcd_data_folder);
+	string getPcdDataFolder();
+
 };
