@@ -55,7 +55,7 @@ int main (int argc, char** argv)
 	ROS_INFO("pcl_reader node initialized ...");
 	
 	ros::NodeHandle nh;
-	
+		
 	if(!nh.hasParam("pcd_filename"))
 	{
 		nh.setParam("pcd_filename", "table.pcd");
