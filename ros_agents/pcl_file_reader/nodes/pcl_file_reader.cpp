@@ -24,8 +24,8 @@ void read_request_cb(const std_msgs::String::ConstPtr& pcl_reading_args)
 	
 	ROS_INFO("Point cloud reading request received with the follow arguments : [%s]", pcl_reading_args->data.c_str());
 	
-	nh.getParam("/pcd_path", _pcd_path);
-	nh.getParam("/pcd_filename", _pcd_filename);
+	nh.getParam("/pcl_file_reader/pcd_path", _pcd_path);
+	nh.getParam("/pcl_file_reader/pcd_filename", _pcd_filename);
 	PCDSimpleIO cloud_reader(_pcd_path, _pcd_filename);
 	
 	//if(cloud_reader.getCloud(cloud)) //this is more suitable way to do it but it gives runtime error
@@ -56,16 +56,16 @@ int main (int argc, char** argv)
 	
 	ros::NodeHandle nh;
 		
-	if(!nh.hasParam("pcd_filename"))
+	if(!nh.hasParam("pcl_file_reader/pcd_filename"))
 	{
-		nh.setParam("pcd_filename", "table.pcd");
-		ROS_INFO("Could not find parameter /pcd_filename , setted to default value by the node");
+		nh.setParam("pcl_file_reader/pcd_filename", "table.pcd");
+		ROS_INFO("Could not find parameter /pcl_file_reader/pcd_filename , setted to default value by the node");
 	}
 	
-	if(!nh.hasParam("pcd_path"))
+	if(!nh.hasParam("pcl_file_reader/pcd_path"))
 	{
-		nh.setParam("pcd_path", ros::package::getPath("pcl_file_reader") + "/../../data/pcd_files/");
-		ROS_INFO("Could not find parameter /pcd_path , setted to default value by the node");
+		nh.setParam("pcl_file_reader/pcd_path", ros::package::getPath("pcl_file_reader") + "/../../data/pcd_files/");
+		ROS_INFO("Could not find parameter /pcl_file_reader/pcd_path , setted to default value by the node");
 	}
 		
 	cloud_pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("/cloud", 1);
