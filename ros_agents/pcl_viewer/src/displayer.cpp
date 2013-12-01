@@ -20,3 +20,6 @@ CloudXYZ::Ptr Displayer::getDisplayedCloud(){
 	return Displayer::displayedCloud;
 }
 
+bool Displayer::wasStopped(){
+	return Displayer::viewer.wasStopped();
+}

@@ -19,6 +19,7 @@ public:
 	void Displayer();
 	void setDisplayedCloud(CloudXYZ::Ptr cloud);
 	CloudXYZ::Ptr getDisplayedCloud();
+	bool wasStopped();
 	
 private:
 	//bool colored = false;
