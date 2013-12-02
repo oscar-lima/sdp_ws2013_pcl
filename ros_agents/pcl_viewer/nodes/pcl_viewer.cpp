@@ -19,7 +19,8 @@ int main (int argc, char** argv){
 	ros::Subscriber sub = nh.subscribe("/cloud", 1, viewerCallback);
 
 	// Spin
-	while(!viewer->wasStopped()){
+	while(!viewer->wasStopped() && ros::ok()){
 		ros::spinOnce();
 	}
+	delete(viewer);
 }
