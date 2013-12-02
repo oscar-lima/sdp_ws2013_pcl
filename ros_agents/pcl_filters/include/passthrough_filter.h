@@ -17,12 +17,15 @@ class passthroughFilter : public filtersInterface
 public:
 
 	void applyFilter(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest);
-	void setParams(char *filter_axis,float range_min,float range_max);
+	void setFilterAxis(std::string filter_axis);
+	void setMinRange(float range_min);
+	void setMaxRange(float range_max);
+	
 	
 private:
-char *filter_axis;
-float range_min;
-float range_max;
+	std::string filter_axis;
+	float range_min;
+	float range_max;
 };
 
 #endif /* PASSTHROUGH_FILTERS_H_ */
