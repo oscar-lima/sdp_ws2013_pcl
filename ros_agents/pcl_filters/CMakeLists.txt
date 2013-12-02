@@ -18,8 +18,8 @@ include_directories(
    ${PCL_INCLUDE_DIRS}
 )
 
-add_executable(filter_passthrough nodes/passthrough_agent.cpp src/passthrough_filter.cpp)
-target_link_libraries(filter_passthrough ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+add_executable(passthrough_filter nodes/passthrough_agent.cpp src/passthrough_filter.cpp)
+target_link_libraries(passthrough_filter ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
-add_executable(filter_downsampling nodes/downsampling_agent.cpp src/downsampling_filter.cpp)
-target_link_libraries(filter_downsampling ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+add_executable(downsampling_filter nodes/downsampling_agent.cpp src/downsampling_filter.cpp)
+target_link_libraries(downsampling_filter ${catkin_LIBRARIES} ${PCL_LIBRARIES})

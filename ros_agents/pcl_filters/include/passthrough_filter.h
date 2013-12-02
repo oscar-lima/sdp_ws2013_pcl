@@ -24,8 +24,8 @@ public:
 	
 private:
 	std::string filter_axis;
-	float range_min;
-	float range_max;
+	float range_min_limit;
+	float range_max_limit;
 };
 
 #endif /* PASSTHROUGH_FILTERS_H_ */

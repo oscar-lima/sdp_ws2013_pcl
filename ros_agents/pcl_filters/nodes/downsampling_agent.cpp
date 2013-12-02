@@ -18,13 +18,13 @@ void cloud_cb(point_cloud src_cloud)
 int main (int argc, char** argv)
 {
 	// Initialize ROS
-	ros::init (argc, argv, "filter_downsampling");
+	ros::init (argc, argv, "downsampling_filter");
 	ros::NodeHandle nh;
 	// Create a ROS subscriber for the input point cloud
-	ros::Subscriber sub = nh.subscribe ("cloud", 1, cloud_cb);
+	ros::Subscriber sub = nh.subscribe ("/cloud", 1, cloud_cb);
 
 	//Create a ROS publisher for the output point cloud
-	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("cloud", 1);
+	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("/cloud", 1);
 
 	ros::spin();
 }
