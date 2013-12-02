@@ -16,7 +16,7 @@ int main (int argc, char** argv){
 	ros::init(argc, argv, "pcl_viewer");
 	ros::NodeHandle nh;
 	// Create a ROS subscriber for the input point cloud
-	ros::Subscriber sub = nh.subscribe("/cloud", 1, viewerCallback);
+	ros::Subscriber sub = nh.subscribe("/filtered_cloud", 1, viewerCallback);
 
 	// Spin
 	while(!viewer->wasStopped() && ros::ok()){

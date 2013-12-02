@@ -23,3 +23,11 @@ target_link_libraries(passthrough_filter ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
 add_executable(downsampling_filter nodes/downsampling_agent.cpp src/downsampling_filter.cpp)
 target_link_libraries(downsampling_filter ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+
+add_executable(statisticaloutlierremoval_filter nodes/statisticaloutlierremoval_agent.cpp src/statisticaloutlierremoval_filter.cpp)
+target_link_libraries(statisticaloutlierremoval_filter ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+
+add_executable(radiusoutlierremoval_filter nodes/radiusoutlierremoval_agent.cpp src/radiusoutlierremoval_filter.cpp)
+target_link_libraries(radiusoutlierremoval_filter ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+
+

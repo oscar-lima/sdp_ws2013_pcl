@@ -62,7 +62,7 @@ int main (int argc, char** argv)
 	ros::Subscriber sub = nh.subscribe ("/cloud", 1, cloud_cb);
 
 	//Create a ROS publisher for the output point cloud
-	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("/cloud", 1);
+	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("/filtered_cloud", 1);
 
 	ros::spin();
 }
