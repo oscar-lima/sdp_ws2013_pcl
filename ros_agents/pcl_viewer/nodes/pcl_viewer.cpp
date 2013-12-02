@@ -7,7 +7,7 @@ Displayer *viewer;
 
 void viewerCallback(CloudXYZ::Ptr cloud){
 	viewer->setDisplayedCloud(cloud);
-	ROS_INFO("Cloud received: %lu points", viewer->getDisplayedCloud()->points.size());
+	//ROS_INFO("Cloud received: %lu points", viewer->getDisplayedCloud()->points.size());
 }
 
 int main (int argc, char** argv){
