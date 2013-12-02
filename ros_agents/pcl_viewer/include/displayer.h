@@ -8,23 +8,21 @@
 #ifndef DISPLAYER_H_
 #define DISPLAYER_H_
 
-#include <pcl/point_types.h>
 #include <pcl/visualization/cloud_viewer.h>
 
 typedef pcl::PointCloud<pcl::PointXYZ> CloudXYZ;
 
 class Displayer {
 public:
-	//void setParams(bool colored);
-	void Displayer();
-	void setDisplayedCloud(CloudXYZ::Ptr cloud);
+	Displayer();
+	~Displayer();
+	void setDisplayedCloud(CloudXYZ::Ptr &cloud);
 	CloudXYZ::Ptr getDisplayedCloud();
 	bool wasStopped();
 	
 private:
-	//bool colored = false;
 	CloudXYZ::Ptr displayedCloud;
-	pcl::visualization::CloudViewer viewer;
+	pcl::visualization::CloudViewer *viewer;
 	
 };
 

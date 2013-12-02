@@ -3,10 +3,11 @@
 #include "pcl_ros/point_cloud.h"
 #include "displayer.h"
 
-Displayer viewer;
+Displayer *viewer;
 
 void viewerCallback(CloudXYZ::Ptr cloud){
-	viewer.setDisplayedCloud(cloud);
+	viewer->setDisplayedCloud(cloud);
+	ROS_INFO("Cloud received: %lu points", viewer->getDisplayedCloud()->points.size());
 }
 
 int main (int argc, char** argv){
@@ -15,10 +16,10 @@ int main (int argc, char** argv){
 	ros::init(argc, argv, "pcl_viewer");
 	ros::NodeHandle nh;
 	// Create a ROS subscriber for the input point cloud
-	ros::Subscriber sub = nh.subscribe("cloud", 1, viewerCallback);
+	ros::Subscriber sub = nh.subscribe("/cloud", 1, viewerCallback);
 
 	// Spin
-	while(!viewer.wasStopped()){
+	while(!viewer->wasStopped()){
 		ros::spinOnce();
 	}
 }
