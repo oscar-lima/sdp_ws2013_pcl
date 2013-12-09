@@ -9,7 +9,6 @@
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <cstring>
-//#include "pcl_ros/point_cloud.h"
 
 using namespace std;
 
