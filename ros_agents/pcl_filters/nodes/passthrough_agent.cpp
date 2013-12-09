@@ -48,13 +48,11 @@ int main (int argc, char** argv)
 {
 	// Initialize ROS
 	ros::init (argc, argv, "passthrough_filter");
-	ros::NodeHandle nh;
 	min_range = 0.0f;
 	max_range = 0.0f;
 	dynamic_reconfigure::Server<pcl_filters::passthroughConfig> server;
 	dynamic_reconfigure::Server<pcl_filters::passthroughConfig>::CallbackType f;
 	f = boost::bind(&dynamic_reconfigure_callback, _1, _2);
 	server.setCallback(f);
-
 	ros::spin();
 }
