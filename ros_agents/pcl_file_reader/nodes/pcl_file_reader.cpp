@@ -14,6 +14,11 @@ ros::Subscriber sub;
 void callback(pcl_file_reader::pcl_file_readerConfig &config, uint32_t level) 
 {
   ROS_INFO("Reconfigure Request");
+  /*
+  std::string _pcd_path, _pcd_filename;
+  _pcd_path = config.pcd_path.c_str();
+  _pcd_filename = config.pcd_filename.c_str();
+  */
 }
 
 void read_request_cb(const std_msgs::String::ConstPtr& pcl_reading_args)
@@ -28,7 +33,10 @@ void read_request_cb(const std_msgs::String::ConstPtr& pcl_reading_args)
 	nh.getParam("/pcl_file_reader/pcd_path", _pcd_path);
 	nh.getParam("/pcl_file_reader/pcd_filename", _pcd_filename);
 	
-	ROS_INFO("filename");
+	ROS_INFO("pcd_path parameter loaded succesfully : %s", _pcd_path.c_str());
+	//ROS_INFO(_pcd_path);
+	ROS_INFO("pcd_filename parameter loaded succesfully : %s", _pcd_filename.c_str());
+	//ROS_INFO(_pcd_filename);
 	
 	PCDSimpleIO cloud_reader(_pcd_path, _pcd_filename);
 
@@ -54,7 +62,7 @@ void read_request_cb(const std_msgs::String::ConstPtr& pcl_reading_args)
 
 int main(int argc, char **argv) 
 {
-	ros::init (argc, argv, "pcl_reader");
+	ros::init (argc, argv, "pcl_file_reader");
 	ROS_INFO("pcl_reader node initialized ...");
 	
   dynamic_reconfigure::Server<pcl_file_reader::pcl_file_readerConfig> reader;
