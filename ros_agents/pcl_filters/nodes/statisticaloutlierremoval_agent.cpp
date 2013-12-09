@@ -2,6 +2,9 @@
 #include "pcl_ros/point_cloud.h"
 #include "statisticaloutlierremoval_filter.h"
 
+
+
+
 typedef pcl::PointCloud<pcl::PointXYZ>::Ptr point_cloud;
 ros::Publisher pub;
 statisticaloutlierremovalFilter test;
