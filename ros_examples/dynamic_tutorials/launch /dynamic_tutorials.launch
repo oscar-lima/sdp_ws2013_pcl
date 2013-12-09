@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="dynamic_tutorials" type="dynamic_reconfigure_node" name="dynamic_reconfigure_node" output="screen" required="true"/>
+	<node name="reconfigure_gui" pkg="dynamic_reconfigure" type="reconfigure_gui" />
+</launch>
