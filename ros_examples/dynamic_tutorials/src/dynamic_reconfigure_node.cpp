@@ -1,7 +1,7 @@
 #include <dynamic_reconfigure/server.h>
-#include <your_package/MyStuffConfig.h>
+#include <dynamic_tutorials/MyStuffConfig.h>
 
-void callback(your_package::MyStuffConfig &config, uint32_t level)
+void callback(dynamic_tutorials::MyStuffConfig &config, uint32_t level)
 {
   ROS_INFO("Reconfigure request : %f %f %i %i %i %s %i %s %f %i",
            config.groups.angles.min_ang, config.groups.angles.max_ang,
@@ -16,8 +16,8 @@ void callback(your_package::MyStuffConfig &config, uint32_t level)
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "dynamic_reconfigure_node");
-  dynamic_reconfigure::Server<your_package::MyStuffConfig> srv;
-  dynamic_reconfigure::Server<your_package::MyStuffConfig>::CallbackType f;
+  dynamic_reconfigure::Server<dynamic_tutorials::MyStuffConfig> srv;
+  dynamic_reconfigure::Server<dynamic_tutorials::MyStuffConfig>::CallbackType f;
   f = boost::bind(&callback, _1, _2);
   srv.setCallback(f);
   ROS_INFO("Starting to spin...");
