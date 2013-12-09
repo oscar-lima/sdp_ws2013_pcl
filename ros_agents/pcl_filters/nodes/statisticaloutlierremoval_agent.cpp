@@ -9,9 +9,14 @@ statisticaloutlierremovalFilter test;
 
 void cloud_cb(point_cloud src_cloud)
 {
+	int neighbours = 0;
+	double standard_deviation = 0.0f;
+	
+	ros::param::get("/statisticaloutlierremoval_filter/neighbours", neighbours);
+	ros::param::get("/statisticaloutlierremoval_filter/standard_deviation", standard_deviation);
 	//point_cloud dest_cloud
-	test.setNeighbours(50);
-	test.setStandardDeviation(0.6);
+	test.setNeighbours(neighbours);
+	test.setStandardDeviation(standard_deviation);
 	test.applyFilter(src_cloud,src_cloud);
 	pub.publish(src_cloud); 
 	

@@ -9,9 +9,14 @@ radiusoutlierremovalFilter test;
 
 void cloud_cb(point_cloud src_cloud)
 {
+	int min_neighbours = 0;
+	double search_radius = 0.0f;
 	
-	test.setMinNeighbours(50);
-	test.setSearchRadius(0.6);
+	ros::param::get("/radiusoutlierremoval_filter/min_neighbours", min_neighbours);
+	ros::param::get("/radiusoutlierremoval_filter/search_radius", search_radius);
+	
+	test.setMinNeighbours(min_neighbours);
+	test.setSearchRadius(search_radius);
 	test.applyFilter(src_cloud,src_cloud);
 	pub.publish(src_cloud); 
 	

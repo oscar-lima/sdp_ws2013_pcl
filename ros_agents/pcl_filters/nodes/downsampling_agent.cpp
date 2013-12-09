@@ -6,11 +6,20 @@ typedef pcl::PointCloud<pcl::PointXYZ>::Ptr point_cloud;
 ros::Publisher pub;
 downsamplingFilter test;
 
+
 void cloud_cb(point_cloud src_cloud)
-{
-	test.setVoxelWidth(0.01);
-	test.setVoxelLength(0.01);
-	test.setVoxelHeight(0.01);
+{	
+	double v_width = 0.0f;
+	double v_length = 0.0f;
+	double v_height = 0.0f;
+	
+	ros::param::get("/downsampling_filter/VoxelWidth", v_width);
+	ros::param::get("/downsampling_filter/VoxelLength", v_length);
+	ros::param::get("/downsampling_filter/VoxelHeight", v_height);
+	
+	test.setVoxelWidth(v_width);
+	test.setVoxelLength(v_length);
+	test.setVoxelHeight(v_height);
 	test.applyFilter(src_cloud,src_cloud);
 	pub.publish(src_cloud); 
 }

@@ -5,52 +5,27 @@
 typedef pcl::PointCloud<pcl::PointXYZ>::Ptr point_cloud;
 ros::Publisher pub;
 passthroughFilter test;
-void cloud_ranges_find(point_cloud cloud);
-
 
 
 void cloud_cb(point_cloud src_cloud)
 {
 	//point_cloud dest_cloud
-	cloud_ranges_find(src_cloud);
-	std::string axis = "x";
-	//char *axis("x");
+	std::string axis;
+	double min_range = 0.0f;
+	double max_range = 0.0f;
+	
+	test.cloud_ranges_find(src_cloud);
+	ros::param::get("/passthrough_filter/filteration_axis", axis);
+	ros::param::get("/passthrough_filter/min_range", min_range);
+	ros::param::get("/passthrough_filter/max_range", max_range);
+	
 	test.setFilterAxis(axis);
-	test.setMinRange(0.0);
-	test.setMaxRange(0.5);
+	test.setMinRange(min_range);
+	test.setMaxRange(max_range);
 	test.applyFilter(src_cloud,src_cloud);
 	pub.publish(src_cloud); 
 	
 	pub.shutdown();
-}
-void cloud_ranges_find(point_cloud cloud){
-
-	struct range_axis{
-		float max_x;
-		float min_x;
-		float max_y;
-		float min_y;
-		float max_z;
-		float min_z;
-	}range;
-	 for (size_t i = 0; i < cloud->points.size(); ++i){
-		 if(cloud->points[i].x > range.max_x)
-		    {range.max_x = cloud->points[i].x;}
-		 else if(cloud->points[i].x < range.min_x)
-		   { range.min_x = cloud->points[i].x;}
-		 if(cloud->points[i].y > range.max_y)
-		    {range.max_y = cloud->points[i].y;}
-		 else if(cloud->points[i].y < range.min_y)
-		   { range.min_y= cloud->points[i].y;}
-		 if(cloud->points[i].z > range.max_z)
-		    {range.max_z = cloud->points[i].z;}
-		 else if(cloud->points[i].z < range.min_z)
-		   { range.min_z= cloud->points[i].z;}
-	}
-	std::cout << "\nSelect the range & Specify the axis of filtration";
-	std::cout << "\nRange along x-axis:[" << range.min_x << "," << range.max_x<<"]";
-	std::cout << "\nRange along y-axis:[" << range.min_y << "," << range.max_y<<"]";
-	std::cout << "\nRange along z-axis:[" << range.min_z << "," << range.max_z<<"]"<<std::endl;
 }
 
 int main (int argc, char** argv)

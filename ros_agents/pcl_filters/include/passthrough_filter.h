@@ -20,6 +20,7 @@ public:
 	void setFilterAxis(std::string filter_axis);
 	void setMinRange(float range_min);
 	void setMaxRange(float range_max);
+	void cloud_ranges_find(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
 	
 	
 private:
