@@ -9,7 +9,7 @@
 	<!-- pointcloud viewer node -->
 	<node pkg="pcl_viewer" type="pcl_viewer" name="pcl_viewer" required="true"> </node>
 
-	<!--<node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure" required="true"> </node>-->
+	<node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure" required="true"> </node>
 
 	<!-- run the following command to visualize the pointcloud : -->
 	<!-- rostopic pub /read_request std_msgs/String "Read pcd" -->
