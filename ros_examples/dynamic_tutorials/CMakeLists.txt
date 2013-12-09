@@ -12,21 +12,24 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 generate_dynamic_reconfigure_options(
-   #cfg/Tutorials.cfg
+     #cfg/Tutorials.cfg
     cfg/MyStuff.cfg
 )
 
+catkin_package()
 # make sure configure headers are built before any node using them
 
 
 include_directories(
-	include 
+   include 
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(dynamic_reconfigure_node src/dynamic_reconfigure_node.cpp)
 
- #add_executable(server_node src/server.cpp)
-target_link_libraries(dynamic_reconfigure_node ${catkin_LIBRARIES})
-add_dependencies(dynamic_reconfigure_node ${PROJECT_NAME}_gencfg) 
- #add_dependencies(server_node ${PROJECT_NAME}_gencfg) 
+add_executable(server_node src/server.cpp)
+target_link_libraries(server_node ${catkin_LIBRARIES})
+add_dependencies(server_node ${PROJECT_NAME}_gencfg) 
+
+#add_executable(dynamic_reconfigure_node src/dynamic_reconfigure_node.cpp)
+#target_link_libraries(dynamic_reconfigure_node ${catkin_LIBRARIES})
+#add_dependencies(dynamic_reconfigure_node ${PROJECT_NAME}_gencfg) 
