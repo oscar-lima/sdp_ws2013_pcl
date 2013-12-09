@@ -1,0 +1,7 @@
+\subsubsection usage Usage
+\verbatim
+<node name="pcl_viewer" pkg="pcl_viewer" type="pcl_viewer">
+  <param name="viewer_sub" type="str" value="final_cloud" />
+</node>
+\endverbatim
+

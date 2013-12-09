@@ -1,0 +1,6 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~viewer_sub" : \b [str] The name of the topic the viewer is subscribing min: , default: final_cloud, max: 
+
