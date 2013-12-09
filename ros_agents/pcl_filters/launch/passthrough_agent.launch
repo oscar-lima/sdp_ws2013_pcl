@@ -2,9 +2,6 @@
 <launch>
 
 	<node pkg="pcl_filters" type="passthrough_filter" name="passthrough_filter" output="screen" required="true">
-		<param name="filteration_axis" type="string" value="x"/>
-		<param name="min_range" type="double" value="0.0" />
-		<param name="max_range" type="double" value="0.5" />
 	</node>
   
 </launch>

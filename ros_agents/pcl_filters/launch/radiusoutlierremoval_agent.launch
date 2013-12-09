@@ -2,8 +2,6 @@
 <launch>
 
 	<node pkg="pcl_filters" type="radiusoutlierremoval_filter" name="radiusoutlierremoval_filter" output="screen" required="true">
-		<param name="min_neighbours" type="integer" value="0.0" />
-		<param name="search_radius" type="double" value="0.5" />
 	</node>
   
 </launch>
