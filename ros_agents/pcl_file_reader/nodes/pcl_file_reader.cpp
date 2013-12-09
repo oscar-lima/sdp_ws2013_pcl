@@ -11,17 +11,21 @@
 ros::Publisher cloud_pub;
 ros::Subscriber sub;
 
-void callback(pcl_file_reader::pcl_file_readerConfig &config, uint32_t level) 
+void dynamicReconfigureCallback(pcl_file_reader::pcl_file_readerConfig &config, uint32_t level) 
 {
   ROS_INFO("Reconfigure Request");
-  /*
-  std::string _pcd_path, _pcd_filename;
-  _pcd_path = config.pcd_path.c_str();
-  _pcd_filename = config.pcd_filename.c_str();
-  */
+  
+  ros::NodeHandle nh;
+  std::string _pcd_path, _pcd_filename, file_reader_pub;
+  //_pcd_path = config.pcd_path.c_str();
+  //_pcd_filename = config.pcd_filename.c_str();
+  file_reader_pub = config.file_reader_pub.c_str();
+  
+  cloud_pub.shutdown();
+  cloud_pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > (file_reader_pub, 1);
 }
 
-void read_request_cb(const std_msgs::String::ConstPtr& pcl_reading_args)
+void readRequestCb(const std_msgs::String::ConstPtr& pcl_reading_args)
 {
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;
 	std::string _pcd_path, _pcd_filename;
@@ -68,13 +72,12 @@ int main(int argc, char **argv)
   dynamic_reconfigure::Server<pcl_file_reader::pcl_file_readerConfig> reader;
   dynamic_reconfigure::Server<pcl_file_reader::pcl_file_readerConfig>::CallbackType f;
 
-  f = boost::bind(&callback, _1, _2);
+  f = boost::bind(&dynamicReconfigureCallback, _1, _2);
   reader.setCallback(f);
 
 	ros::NodeHandle nh;
 	
-	cloud_pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("/cloud", 1);
-	sub = nh.subscribe("read_request", 1, read_request_cb);
+	sub = nh.subscribe("read_request", 1, readRequestCb);
 	
 	ros::spin();
 }

@@ -12,7 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 find_package(PCL 1.7 REQUIRED)
 
-generate_dynamic_reconfigure_options(cfg/param.cfg)
+generate_dynamic_reconfigure_options(cfg/file_reader.cfg)
 
 catkin_package()
 
