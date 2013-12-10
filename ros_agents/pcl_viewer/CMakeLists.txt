@@ -7,7 +7,6 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 find_package(PCL 1.7 REQUIRED)
-find_package(Eigen REQUIRED)
 
 generate_dynamic_reconfigure_options(
   cfg/viewer_configure.cfg
