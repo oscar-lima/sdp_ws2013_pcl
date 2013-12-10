@@ -2,7 +2,7 @@
 <package>
   <name>pcl_kinect</name>
   <version>0.0.0</version>
-  <description>The pcl_viewer package</description>
+  <description>The pcl_kinect package</description>
 
   <maintainer email="shehzad.ahmed@smail.inf.h-brs.de">Shehzad Ahmed</maintainer>
 	<maintainer email="iuri.araujo@smail.inf.h-brs.de">Iuri Andrade</maintainer>
