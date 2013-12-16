@@ -9,7 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(PCL 1.7 REQUIRED)
 
 generate_dynamic_reconfigure_options(
-  cfg/viewer_configure.cfg
+  cfg/viewer.cfg
 )
 
 catkin_package( 
@@ -24,7 +24,6 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 	${PCL_INCLUDE_DIRS}
 	include/
-	cfg/cpp/
 )
 
 add_library(displayer src/displayer.cpp)
