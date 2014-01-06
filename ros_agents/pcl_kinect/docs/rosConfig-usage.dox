@@ -1,7 +1,0 @@
-\subsubsection usage Usage
-\verbatim
-<node name="pcl_kinect" pkg="pcl_kinect" type="pcl_kinect">
-  <param name="kinect_pub" type="str" value="final_cloud" />
-</node>
-\endverbatim
-
