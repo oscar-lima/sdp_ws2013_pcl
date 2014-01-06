@@ -19,7 +19,7 @@ void dynamic_reconfigure_callback(pcl_filters::radiusoutlierremovalConfig &confi
 
 void dynamic_reconfigure_callback(pcl_filters::radiusoutlierremovalConfig &config, uint32_t level) 
 {	
-	ros::NodeHandle nh;
+	ros::NodeHandle nh("~");
 	min_neighbours = config.min_neighbours;
 	search_radius = config.search_radius;
 	radiusoutlierremoval_sub = config.radiusoutlierremoval_sub.c_str();

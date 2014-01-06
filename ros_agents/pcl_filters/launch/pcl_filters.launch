@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+	<include file="$(find pcl_filters)/launch/passthrough_agent.launch"/>
+	<include file="$(find pcl_filters)/launch/downsampling_agent.launch"/>
+	<include file="$(find pcl_filters)/launch/radiusoutlierremoval_agent.launch"/>
+	<include file="$(find pcl_filters)/launch/statisticaloutlierremoval_agent.launch"/>
+
+</launch>

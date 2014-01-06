@@ -22,7 +22,7 @@ void reconfigureCallback(pcl_viewer::viewerConfig &config, uint32_t level){
 	if (!config.viewer_sub.empty() && !(viewer_sub == config.viewer_sub.c_str())){
 		subs.shutdown();
 		viewer_sub = config.viewer_sub.c_str();
-		ros::NodeHandle nh;
+		ros::NodeHandle nh("~");
 		subs = nh.subscribe(viewer_sub, 1, viewerCallback);
 	}
 }

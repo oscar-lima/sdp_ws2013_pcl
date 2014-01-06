@@ -19,7 +19,7 @@ void dynamic_reconfigure_callback(pcl_filters::downsamplingConfig &config, uint3
 
 void dynamic_reconfigure_callback(pcl_filters::downsamplingConfig &config, uint32_t level) 
 {	
-	ros::NodeHandle nh;
+	ros::NodeHandle nh("~");
 	v_width = config.voxel_width;
 	v_length = config.voxel_length;
 	v_height = config.voxel_height;

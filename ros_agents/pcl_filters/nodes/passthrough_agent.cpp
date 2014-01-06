@@ -20,7 +20,7 @@ void dynamic_reconfigure_callback(pcl_filters::passthroughConfig &config, uint32
 
 void dynamic_reconfigure_callback(pcl_filters::passthroughConfig &config, uint32_t level) 
 {	
-	ros::NodeHandle nh;
+	ros::NodeHandle nh("~");
 	axis = config.filteration_axis.c_str();
 	min_range = config.min_range;
 	max_range = config.max_range;

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+	<node pkg="pcl_viewer" type="pcl_viewer" name="pcl_viewer" output="screen" required="true">
+	</node>
+  
+</launch>

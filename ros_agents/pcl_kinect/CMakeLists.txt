@@ -24,6 +24,7 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 	${PCL_INCLUDE_DIRS}
 	include/
+	/usr/include/ni
 )
 
 add_library(kinect src/kinect_reader.cpp)

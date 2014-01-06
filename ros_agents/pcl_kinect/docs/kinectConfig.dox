@@ -1,0 +1,6 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~kinect_pub" : \b [str] The name of the topic the kinect will publish on min: , default: final_cloud, max: 
+

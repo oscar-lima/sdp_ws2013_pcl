@@ -20,7 +20,7 @@ void dynamic_reconfigure_callback(pcl_filters::statisticaloutlierremovalConfig &
 
 void dynamic_reconfigure_callback(pcl_filters::statisticaloutlierremovalConfig &config, uint32_t level) 
 {	
-	ros::NodeHandle nh;
+	ros::NodeHandle nh("~");
 	neighbours = config.neighbours;
 	standard_deviation = config.standard_deviation;
 	statisticaloutlierremoval_sub = config.statisticaloutlierremoval_sub.c_str();

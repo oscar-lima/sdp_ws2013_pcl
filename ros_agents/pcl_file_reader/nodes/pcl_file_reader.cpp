@@ -15,7 +15,7 @@ void dynamicReconfigureCallback(pcl_file_reader::pcl_file_readerConfig &config, 
 {
   ROS_INFO("Reconfigure Request");
   
-  ros::NodeHandle nh;
+  ros::NodeHandle nh("~");
   std::string _pcd_path, _pcd_filename, file_reader_pub;
   //_pcd_path = config.pcd_path.c_str();
   //_pcd_filename = config.pcd_filename.c_str();
