@@ -31,7 +31,7 @@ void dynamicReconfigureCallback(pcl_file_reader::pcl_file_readerConfig &config, 
 		file_existance = true;
 	}
 
-	if(pcd_filename != "" && file_existance)
+	if(pcd_path != "" && pcd_filename != "" && file_existance)
 	{
 		bool cloud_read_succes = false;
 		pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;
