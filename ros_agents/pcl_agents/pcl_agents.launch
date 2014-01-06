@@ -3,12 +3,12 @@
 
 	<!-- pointcloud reader node -->
 	<include file="$(find pcl_file_reader)/launch/pcl_file_reader.launch"/>
-  
-	<!-- pointcloud viewer node -->
-	<include file="$(find pcl_viewer)/launch/pcl_viewer.launch"/>
 	
 	<!-- pointcloud filters node -->
 	<include file="$(find pcl_filters)/launch/pcl_filters.launch"/>
+	
+	<!-- pointcloud viewer node -->
+	<include file="$(find pcl_viewer)/launch/pcl_viewer.launch"/>
 
 	<node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure" required="true"> </node>
 

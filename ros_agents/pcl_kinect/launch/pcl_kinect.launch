@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+
+	<node pkg="pcl_kinect" type="pcl_kinect" name="pcl_kinect" output="screen" required="true"> </node>
+
+</launch>

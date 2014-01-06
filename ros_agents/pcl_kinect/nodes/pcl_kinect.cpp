@@ -22,7 +22,7 @@ void reconfigureCallback(pcl_kinect::kinectConfig &config, uint32_t level){
 	if (!config.kinect_pub.empty() && !(kinect_pub == config.kinect_pub.c_str())){
 		pub.shutdown();
 		kinect_pub = config.kinect_pub.c_str();
-		ros::NodeHandle nh;
+		ros::NodeHandle nh("~");
 		pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> >(kinect_pub, 1);
 	}
 }
