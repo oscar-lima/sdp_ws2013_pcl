@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- Launch file designed to test plc_file_reader agent, it will visualize a pointcloud -->
+
+	<!-- pointcloud reader node -->
+	<node pkg="pcl_file_reader" type="pcl_file_reader" name="pcl_file_reader" output="screen" required="true"> </node>
+  
+	<!-- pointcloud viewer node -->
+	<include file="$(find pcl_viewer)/launch/pcl_viewer.launch"/>
+
+	<!-- dynamic reconfigure gui -->
+	<node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure" required="true"> </node>
+
+</launch>
