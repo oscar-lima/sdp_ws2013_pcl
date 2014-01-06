@@ -4,6 +4,9 @@
 	<!-- pointcloud reader node -->
 	<include file="$(find pcl_file_reader)/launch/pcl_file_reader.launch"/>
 	
+	<!-- pointcloud reader node -->
+	<include file="$(find pcl_kinect)/launch/pcl_kinect.launch"/>
+	
 	<!-- pointcloud filters node -->
 	<include file="$(find pcl_filters)/launch/pcl_filters.launch"/>
 	
