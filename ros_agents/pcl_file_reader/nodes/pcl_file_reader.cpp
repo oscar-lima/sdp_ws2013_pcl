@@ -7,60 +7,54 @@
 #include "std_msgs/String.h"
 
 #include "pcd_simple_io.h"
+#include <sys/stat.h>	//to check file existance: http://stackoverflow.com/questions/4316442/stdofstream-check-if-file-exists-before-writing
 
 ros::Publisher cloud_pub;
 ros::Subscriber sub;
 
+std::string pcd_path;
+std::string pcd_filename;
+
 void dynamicReconfigureCallback(pcl_file_reader::pcl_file_readerConfig &config, uint32_t level) 
 {
-  ROS_INFO("Reconfigure Request");
+	ROS_INFO("Reconfigure request received...");
   
-  ros::NodeHandle nh("~");
-  std::string _pcd_path, _pcd_filename, file_reader_pub;
-  //_pcd_path = config.pcd_path.c_str();
-  //_pcd_filename = config.pcd_filename.c_str();
-  //file_reader_pub = config.file_reader_pub.c_str();
-  
-  cloud_pub.shutdown();
-  cloud_pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("output_cloud", 1);
-}
+	pcd_path = config.pcd_path.c_str();
+	pcd_filename = config.pcd_filename.c_str();
 
-void readRequestCb(const std_msgs::String::ConstPtr& pcl_reading_args)
-{
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;
-	std::string _pcd_path, _pcd_filename;
-	ros::NodeHandle nh;
-	bool cloud_read_succes = false;
-	
-	ROS_INFO("Point cloud reading request received with the follow arguments : [%s]", pcl_reading_args->data.c_str());
-	
-	nh.getParam("/pcl_file_reader/pcd_path", _pcd_path);
-	nh.getParam("/pcl_file_reader/pcd_filename", _pcd_filename);
-	
-	ROS_INFO("pcd_path parameter loaded succesfully : %s", _pcd_path.c_str());
-	//ROS_INFO(_pcd_path);
-	ROS_INFO("pcd_filename parameter loaded succesfully : %s", _pcd_filename.c_str());
-	//ROS_INFO(_pcd_filename);
-	
-	PCDSimpleIO cloud_reader(_pcd_path, _pcd_filename);
+	bool file_existance = false;
+	const std::string& filename = pcd_path + pcd_filename;
 
-	cloud = cloud_reader.getCloud2(cloud_read_succes);
-	
-	if(cloud_read_succes)
+	struct stat buf;
+	if (stat(filename.c_str(), &buf) != -1)
 	{
-		if (cloud->points.size() != 0)
+		file_existance = true;
+	}
+
+	if(pcd_filename != "" && file_existance)
+	{
+		bool cloud_read_succes = false;
+		pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;
+
+		PCDSimpleIO cloud_reader(pcd_path, pcd_filename);
+		cloud = cloud_reader.getCloud2(cloud_read_succes);
+
+		if(cloud_read_succes)
 		{
-			ROS_INFO("Cloud succesfully loaded : %lu points", cloud->points.size());
-			cloud_pub.publish(cloud);
+			if (cloud->points.size() != 0)
+			{
+				ROS_INFO("Cloud succesfully loaded : %lu points", cloud->points.size());
+				cloud_pub.publish(cloud);
+			}
+			else
+			{
+				ROS_ERROR("Attempting to publish empty cloud");
+			}
 		}
 		else
 		{
-			ROS_ERROR("Attempting to publish empty cloud");
+			ROS_ERROR("Could not read pcd file, ensure that pcd_path and pcd_filename parameters have correct values");
 		}
-	}
-	else
-	{
-		ROS_ERROR("Could not read pcd file, ensure that /pcd_path and /pcd_filename parameters have correct values");
 	}
 }
 
@@ -68,16 +62,15 @@ int main(int argc, char **argv)
 {
 	ros::init (argc, argv, "pcl_file_reader");
 	ROS_INFO("pcl_reader node initialized ...");
-	
-  dynamic_reconfigure::Server<pcl_file_reader::pcl_file_readerConfig> reader;
-  dynamic_reconfigure::Server<pcl_file_reader::pcl_file_readerConfig>::CallbackType f;
 
-  f = boost::bind(&dynamicReconfigureCallback, _1, _2);
-  reader.setCallback(f);
+	ros::NodeHandle nh("~");
+	cloud_pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("output_cloud", 1);
+	
+	dynamic_reconfigure::Server<pcl_file_reader::pcl_file_readerConfig> reader;
+	dynamic_reconfigure::Server<pcl_file_reader::pcl_file_readerConfig>::CallbackType f;
 
-	ros::NodeHandle nh;
-	
-	sub = nh.subscribe("read_request", 1, readRequestCb);
-	
+	f = boost::bind(&dynamicReconfigureCallback, _1, _2);
+	reader.setCallback(f);
+
 	ros::spin();
 }
