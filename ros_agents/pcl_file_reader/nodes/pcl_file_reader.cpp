@@ -19,10 +19,10 @@ void dynamicReconfigureCallback(pcl_file_reader::pcl_file_readerConfig &config, 
   std::string _pcd_path, _pcd_filename, file_reader_pub;
   //_pcd_path = config.pcd_path.c_str();
   //_pcd_filename = config.pcd_filename.c_str();
-  file_reader_pub = config.file_reader_pub.c_str();
+  //file_reader_pub = config.file_reader_pub.c_str();
   
   cloud_pub.shutdown();
-  cloud_pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > (file_reader_pub, 1);
+  cloud_pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("output_cloud", 1);
 }
 
 void readRequestCb(const std_msgs::String::ConstPtr& pcl_reading_args)

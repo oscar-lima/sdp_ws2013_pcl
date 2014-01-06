@@ -20,16 +20,18 @@ void dynamic_reconfigure_callback(pcl_filters::radiusoutlierremovalConfig &confi
 void dynamic_reconfigure_callback(pcl_filters::radiusoutlierremovalConfig &config, uint32_t level) 
 {	
 	ros::NodeHandle nh("~");
-	min_neighbours = config.min_neighbours;
-	search_radius = config.search_radius;
-	radiusoutlierremoval_sub = config.radiusoutlierremoval_sub.c_str();
-	radiusoutlierremoval_pub = config.radiusoutlierremoval_pub.c_str();
-	
+	if(min_neighbours != config.min_neighbours)
+		min_neighbours = config.min_neighbours;
+	if(search_radius != config.search_radius)
+		search_radius = config.search_radius;
+	std::string temp_str = config.radiusoutlierremoval_sub.c_str();
+	if(!config.radiusoutlierremoval_sub.empty() && radiusoutlierremoval_sub.compare(temp_str) !=0)
+	{
+		radiusoutlierremoval_sub = config.radiusoutlierremoval_sub.c_str();
+		sub.shutdown();
+		sub = nh.subscribe (radiusoutlierremoval_sub, 1, cloud_cb);
+	}
 	ROS_INFO("Reconfigure Request: %d %f",min_neighbours,search_radius);
-	sub.shutdown();
-	pub.shutdown();
-	sub = nh.subscribe (radiusoutlierremoval_sub, 1, cloud_cb);
-	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > (radiusoutlierremoval_pub, 1);
 }
 void cloud_cb(point_cloud src_cloud)
 {
@@ -45,6 +47,8 @@ int main (int argc, char** argv)
 	ros::init (argc, argv, "radiusoutlierremoval_filter");
 	int min_neighbours = 0;
 	double search_radius = 0.0f;
+	ros::NodeHandle nh("~");
+	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("output_cloud", 1);
 	dynamic_reconfigure::Server<pcl_filters::radiusoutlierremovalConfig> server;
 	dynamic_reconfigure::Server<pcl_filters::radiusoutlierremovalConfig>::CallbackType f;
 	f = boost::bind(&dynamic_reconfigure_callback, _1, _2);

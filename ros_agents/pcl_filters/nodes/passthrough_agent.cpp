@@ -21,17 +21,20 @@ void dynamic_reconfigure_callback(pcl_filters::passthroughConfig &config, uint32
 void dynamic_reconfigure_callback(pcl_filters::passthroughConfig &config, uint32_t level) 
 {	
 	ros::NodeHandle nh("~");
-	axis = config.filteration_axis.c_str();
-	min_range = config.min_range;
-	max_range = config.max_range;
-	passthrough_sub = config.passthrough_sub.c_str();
-	passthrough_pub = config.passthrough_pub.c_str();
-	
+	if (axis.compare(config.filteration_axis.c_str()) != 0)
+		axis = config.filteration_axis.c_str();
+	if(min_range != config.min_range)
+		min_range = config.min_range;
+	if(max_range != config.max_range)
+		max_range = config.max_range;
+	std::string temp_str = config.passthrough_sub.c_str();
+	if (!config.passthrough_sub.empty() && passthrough_sub.compare(temp_str) != 0)
+	{
+		sub.shutdown();
+		passthrough_sub = config.passthrough_sub.c_str();
+		sub = nh.subscribe (passthrough_sub, 1, cloud_cb);
+	}
 	ROS_INFO("Reconfigure Request: %s %f %f",axis.c_str(), min_range,max_range);
-	sub.shutdown();
-	pub.shutdown();
-	sub = nh.subscribe (passthrough_sub, 1, cloud_cb);
-	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > (passthrough_pub, 1);
 }
 
 void cloud_cb(point_cloud src_cloud)
@@ -48,6 +51,8 @@ int main (int argc, char** argv)
 {
 	// Initialize ROS
 	ros::init (argc, argv, "passthrough_filter");
+	ros::NodeHandle nh("~");
+	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("output_cloud", 1);
 	min_range = 0.0f;
 	max_range = 0.0f;
 	dynamic_reconfigure::Server<pcl_filters::passthroughConfig> server;

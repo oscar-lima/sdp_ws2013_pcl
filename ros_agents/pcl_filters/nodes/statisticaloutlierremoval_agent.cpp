@@ -21,16 +21,18 @@ void dynamic_reconfigure_callback(pcl_filters::statisticaloutlierremovalConfig &
 void dynamic_reconfigure_callback(pcl_filters::statisticaloutlierremovalConfig &config, uint32_t level) 
 {	
 	ros::NodeHandle nh("~");
-	neighbours = config.neighbours;
-	standard_deviation = config.standard_deviation;
-	statisticaloutlierremoval_sub = config.statisticaloutlierremoval_sub.c_str();
-	statisticaloutlierremoval_pub = config.statisticaloutlierremoval_pub.c_str();
-	
+	if(neighbours != config.neighbours)
+		neighbours = config.neighbours;
+	if(standard_deviation != config.standard_deviation)
+		standard_deviation = config.standard_deviation;
+	std::string temp_str = config.statisticaloutlierremoval_sub.c_str();
+	if(!config.statisticaloutlierremoval_sub.empty() && statisticaloutlierremoval_sub.compare(temp_str) != 0)
+	{
+		sub.shutdown();
+		statisticaloutlierremoval_sub = config.statisticaloutlierremoval_sub.c_str();
+		sub = nh.subscribe (statisticaloutlierremoval_sub, 1, cloud_cb);
+	}
 	ROS_INFO("Reconfigure Request: %d %f",neighbours,standard_deviation);
-	sub.shutdown();
-	pub.shutdown();
-	sub = nh.subscribe (statisticaloutlierremoval_sub, 1, cloud_cb);
-	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > (statisticaloutlierremoval_pub, 1);
 }
 
 void cloud_cb(point_cloud src_cloud)
@@ -49,6 +51,8 @@ int main (int argc, char** argv)
 	ros::init (argc, argv, "statisticaloutlierremoval_filter");
 	neighbours = 0;
 	standard_deviation = 0.0f;
+	ros::NodeHandle nh("~");
+	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> >("output_cloud", 1);
 	dynamic_reconfigure::Server<pcl_filters::statisticaloutlierremovalConfig> server;
 	dynamic_reconfigure::Server<pcl_filters::statisticaloutlierremovalConfig>::CallbackType f;
 	f = boost::bind(&dynamic_reconfigure_callback, _1, _2);

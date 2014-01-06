@@ -19,7 +19,8 @@ void viewerCallback(CloudXYZ::Ptr cloud){
 void reconfigureCallback(pcl_viewer::viewerConfig &config, uint32_t level){
 	// Create a ROS subscriber for the input point cloud
 	ROS_INFO("Topic name received: %s", config.viewer_sub.c_str());
-	if (!config.viewer_sub.empty() && !(viewer_sub == config.viewer_sub.c_str())){
+	if (!config.viewer_sub.empty() && !(viewer_sub == config.viewer_sub.c_str()))
+	{
 		subs.shutdown();
 		viewer_sub = config.viewer_sub.c_str();
 		ros::NodeHandle nh("~");
