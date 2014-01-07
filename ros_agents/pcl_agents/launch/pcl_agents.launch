@@ -2,7 +2,7 @@
 <launch>
 
 	<!-- pointcloud reader node -->
-	<include file="$(find pcl_file_reader)/launch/pcl_file_reader.launch"/>
+	<node pkg="pcl_file_reader" type="pcl_file_reader" name="pcl_file_reader" > </node>
 	
 	<!-- pointcloud reader node -->
 	<include file="$(find pcl_kinect)/launch/pcl_kinect.launch"/>
