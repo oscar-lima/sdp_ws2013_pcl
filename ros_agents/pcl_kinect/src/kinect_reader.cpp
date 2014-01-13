@@ -7,37 +7,46 @@
 
 #include "kinect_reader.h"
 
-KinectReader::KinectReader(){
-	cloudUnpublished = false;
-	currentCloud = pcl::PointCloud<pcl::PointXYZ>::Ptr(new CloudXYZ);
-	kinectGrabber = new pcl::OpenNIGrabber();
-  if (!kinectGrabber == 0){
+KinectReader::KinectReader()
+{
+	cloud_unpublished_ = false;
+	current_cloud_ = pcl::PointCloud<pcl::PointXYZ>::Ptr(new CloudXYZ);
+	kinect_grabber_ = new pcl::OpenNIGrabber();
+	if (!kinect_grabber_ == 0)
+	{
 		boost::function<void (const CloudXYZ::ConstPtr&)> f = 
-				boost::bind(&KinectReader::grabberCallback, this, _1);
-    kinectGrabber->registerCallback(f);
-    kinectGrabber->start();
+			boost::bind(&KinectReader::grabberCallback, this, _1);
+		kinect_grabber_->registerCallback(f);
+		kinect_grabber_->start();
 	}
 }
 
-KinectReader::~KinectReader(){
-	if(kinectGrabber->isRunning())
-		kinectGrabber->stop();
+KinectReader::~KinectReader()
+{
+	if(kinect_grabber_->isRunning())
+	{
+		kinect_grabber_->stop();
+	}
 }
 
-void KinectReader::grabberCallback(const CloudXYZ::ConstPtr &cloud){
-	cloudUnpublished = true;
-	*currentCloud = *cloud;
+void KinectReader::grabberCallback(const CloudXYZ::ConstPtr &cloud)
+{
+	cloud_unpublished_ = true;
+	*current_cloud_ = *cloud;
 }
 
-CloudXYZ::Ptr KinectReader::getCloud(){
-	cloudUnpublished = false;
-	return currentCloud;
+CloudXYZ::Ptr KinectReader::getCloud()
+{
+	cloud_unpublished_ = false;
+	return current_cloud_;
 }
 
-bool KinectReader::isCloudUnpublished(){
-	return cloudUnpublished;
+bool KinectReader::iscloud_unpublished_()
+{
+	return cloud_unpublished_;
 }
 
-bool KinectReader::isRunning(){
-	return kinectGrabber->isRunning();
+bool KinectReader::isRunning()
+{
+	return kinect_grabber_->isRunning();
 }

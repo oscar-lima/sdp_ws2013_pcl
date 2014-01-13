@@ -3,22 +3,26 @@
 #include "pcl_ros/point_cloud.h"
 #include "kinect_reader.h"
 
-std::string kinect_pub;
-ros::Publisher pub;
-KinectReader *kinect_live;
+std::string kinect_pub_;
+ros::Publisher pub_;
+KinectReader *kinect_live_;
 
-int main(int argc, char** argv){
-	kinect_live = new KinectReader;
+int main(int argc, char** argv)
+{
+	kinect_live_ = new KinectReader;
 	// Initialize ROS
 	ros::init(argc, argv, "pcl_kinect");
 	ros::NodeHandle nh("~");
-	pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> >("output_cloud", 1);
+	pub_ = nh.advertise<pcl::PointCloud<pcl::PointXYZ> >("output_cloud", 1);
 	// Spin
-	while (kinect_live->isRunning() && ros::ok()){
+	while (kinect_live_->isRunning() && ros::ok())
+	{
 		ros::spinOnce();
-		if (kinect_live->isCloudUnpublished())
-			pub.publish(kinect_live->getCloud());
+		if (kinect_live_->isCloudUnpublished())
+		{
+			pub_.publish(kinect_live_->getCloud());
+			}
 	}
-	delete kinect_live;
+	delete kinect_live_;
 	return 0;
 }

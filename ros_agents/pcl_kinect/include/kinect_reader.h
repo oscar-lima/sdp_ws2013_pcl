@@ -14,7 +14,8 @@
 
 typedef pcl::PointCloud<pcl::PointXYZ> CloudXYZ;
 
-class KinectReader {
+class KinectReader
+{
 public:
 	KinectReader();
 	~KinectReader();
@@ -22,11 +23,10 @@ public:
 	CloudXYZ::Ptr getCloud();
 	bool isCloudUnpublished();
 	bool isRunning();
-	
 private:
-	CloudXYZ::Ptr currentCloud;
-	bool cloudUnpublished;
-	pcl::Grabber *kinectGrabber;
+	CloudXYZ::Ptr current_cloud_;
+	bool cloud_unpublished_;
+	pcl::Grabber *kinect_grabber_;
 };
 
 #endif /* KINECT_READER_H_ */
