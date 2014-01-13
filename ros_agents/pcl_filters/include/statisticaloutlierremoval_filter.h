@@ -11,17 +11,17 @@
 #ifndef STATISTICALOUTLIERREMOVAL_FILTERS_H_
 #define STATISTICALOUTLIERREMOVAL_FILTERS_H_
 
-class statisticaloutlierremovalFilter : public filtersInterface
+class StatisticalOutlierFilter : public FiltersInterface
 {
 public:
 
 	void applyFilter(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest);
 	void setNeighbours(int mean_neighbours);
 	void setStandardDeviation(float std_dev_thres);
-	
+
 private:
-	int neighbours;
-	float stdandard_deviation;
+	int neighbours_;
+	float stdandard_deviation_;
 };
 
 #endif /* STATISTICALOUTLIERREMOVAL_FILTERS_H_ */

@@ -1,10 +1,12 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(pcl_filters)
+
 find_package(catkin REQUIRED COMPONENTS 
 	roscpp
 	rospy
 	dynamic_reconfigure
 )
+
 find_package(PCL 1.7 REQUIRED)
 
 generate_dynamic_reconfigure_options(
@@ -14,13 +16,8 @@ generate_dynamic_reconfigure_options(
 	cfg/statisticaloutlierremoval_configure.cfg
 )
 
-catkin_package( 
-				#INCLUDE_DIRS 
-				#LIBRARIES
-				CATKIN_DEPENDS
-					roscpp 
-				#DEPENDS
-               )
+catkin_package(CATKIN_DEPENDS roscpp)
+
 include_directories(
 	include/
 	${catkin_INCLUDE_DIRS}

@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <launch>
 
-	<node pkg="pcl_filters" type="radiusoutlierremoval_filter" name="radiusoutlierremoval_filter" output="screen" required="true">
-	</node>
+	<node pkg="pcl_filters" type="radiusoutlierremoval_filter" name="radiusoutlierremoval_filter" output="screen" required="true"/>
   
 </launch>

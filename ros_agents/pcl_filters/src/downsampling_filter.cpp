@@ -2,26 +2,26 @@
 
 #include "downsampling_filter.h"
 
-void downsamplingFilter::applyFilter(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest)
+void DownsamplingFilter::applyFilter(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest)
 {
 	pcl::VoxelGrid<pcl::PointXYZ> sor;
 	sor.setInputCloud (src);
-	sor.setLeafSize(voxel_width, voxel_length,voxel_height);
+	sor.setLeafSize(voxel_width_, voxel_length_,voxel_height_);
 	sor.filter (*dest);
 }
 
 
-void downsamplingFilter::setVoxelWidth(float voxel_grid_size_x)
+void DownsamplingFilter::setVoxelWidth(float voxel_grid_size_x)
 {
-	voxel_width = voxel_grid_size_x;
+	voxel_width_ = voxel_grid_size_x;
 }
 
-void downsamplingFilter::setVoxelLength(float voxel_grid_size_y)
+void DownsamplingFilter::setVoxelLength(float voxel_grid_size_y)
 {
-	voxel_length = voxel_grid_size_y;
+	voxel_length_ = voxel_grid_size_y;
 }
 
-void downsamplingFilter::setVoxelHeight(float voxel_grid_size_z)
+void DownsamplingFilter::setVoxelHeight(float voxel_grid_size_z)
 {
-	voxel_height = voxel_grid_size_z;
+	voxel_height_ = voxel_grid_size_z;
 }

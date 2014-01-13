@@ -11,17 +11,16 @@
 #ifndef RADIUSOUTLIERREMOVAL_FILTERS_H_
 #define RADIUSOUTLIERREMOVAL_FILTERS_H_
 
-class radiusoutlierremovalFilter : public filtersInterface
+class RadiusOutlierFilter : public FiltersInterface
 {
 public:
-
 	void applyFilter(pcl::PointCloud<pcl::PointXYZ>::Ptr src, pcl::PointCloud<pcl::PointXYZ>::Ptr dest);
 	void setMinNeighbours(int neighbours);
 	void setSearchRadius(float radius);
-	
+
 private:
-	int min_neighbours ;
-	float search_radius;
+	int min_neighbours_;
+	float search_radius_;
 };
 
 #endif /* RADIUSOUTLIERREMOVAL_FILTERS_H_ */
