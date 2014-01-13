@@ -7,28 +7,12 @@
 
 #include "displayer.h"
 
-Displayer::Displayer()
+void Displayer::setDisplayedCloud(const CloudXYZ::ConstPtr &cloud)
 {
-	viewer_ = new pcl::visualization::CloudViewer("Cloud Viewer");
-}
-
-Displayer::~Displayer()
-{
-	delete(viewer_);
-}
-
-void Displayer::setDisplayedCloud(CloudXYZ::Ptr &cloud)
-{
-	viewer_->showCloud(cloud);
-	displayed_cloud_ = cloud;
-}
-
-CloudXYZ::Ptr Displayer::getDisplayedCloud()
-{
-	return displayed_cloud_;
+	viewer_.showCloud(cloud);
 }
 
 bool Displayer::wasStopped()
 {
-	return viewer_->wasStopped();
+	return viewer_.wasStopped();
 }

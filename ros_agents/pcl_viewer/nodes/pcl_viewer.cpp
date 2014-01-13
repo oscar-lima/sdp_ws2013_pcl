@@ -11,7 +11,7 @@ ros::Subscriber subs_;
 
 void reconfigureCallback(pcl_viewer::viewerConfig &config);
 
-void viewerCallback(CloudXYZ::Ptr cloud)
+void viewerCallback(const CloudXYZ::ConstPtr &cloud)
 {
 	viewer_->setDisplayedCloud(cloud);
 	//ROS_INFO("Cloud received: %lu points", viewer_->getDisplayedCloud()->points.size());
