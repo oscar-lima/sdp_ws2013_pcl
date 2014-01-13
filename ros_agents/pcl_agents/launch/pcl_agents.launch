@@ -5,17 +5,18 @@
 	<node pkg="pcl_file_reader" type="pcl_file_reader" name="pcl_file_reader" > </node>
 	
 	<!-- pointcloud reader node -->
-	<include file="$(find pcl_kinect)/launch/pcl_kinect.launch"/>
+	<node pkg="pcl_kinect" type="pcl_kinect" name="pcl_kinect" output="screen" required="false"> </node>
 	
 	<!-- pointcloud filters node -->
 	<include file="$(find pcl_filters)/launch/pcl_filters.launch"/>
 	
 	<!-- pointcloud viewer node -->
-	<include file="$(find pcl_viewer)/launch/pcl_viewer.launch"/>
+	<node pkg="pcl_viewer" type="pcl_viewer" name="pcl_viewer" output="screen" required="true"></node>
 
+	<!-- dynamic reconfigure -->
 	<node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure" required="true"> </node>
 
-	<!-- run the following command to visualize the pointcloud : -->
-	<!-- rostopic pub /read_request std_msgs/String "Read pcd" -->
+	<!-- rqt_graph to see the pipeline -->
+	<node pkg="rqt_graph" type="rqt_graph" name="rqt_graph" required="false"> </node>
 
 </launch>
