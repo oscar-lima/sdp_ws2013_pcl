@@ -21,11 +21,11 @@ class PCDSimpleIO
 	string pcd_data_folder_;
 	CloudXYZ::Ptr cloud_;
 
-	PCDSimpleIO(string pcd_data_folder, string file_name);
-	bool getCloud(CloudXYZ::Ptr &cloud);
-	CloudXYZ::Ptr getCloud2(bool &success);
-	void setFileName(string file_name);
-	string getFileName();
-	void SetPcdDataFolder(string pcd_data_folder);
-	string getPcdDataFolder();
+	PCDSimpleIO (string pcd_data_folder, string file_name);
+	bool getCloud (CloudXYZ::Ptr &cloud);
+	CloudXYZ::Ptr getCloud2 (bool &success);
+	void setFileName (string file_name);
+	string getFileName ();
+	void SetPcdDataFolder (string pcd_data_folder);
+	string getPcdDataFolder ();
 };

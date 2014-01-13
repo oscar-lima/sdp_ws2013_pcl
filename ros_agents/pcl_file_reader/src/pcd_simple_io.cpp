@@ -7,16 +7,16 @@
 
 #include "pcd_simple_io.h"
 
-PCDSimpleIO::PCDSimpleIO(string pcd_data_folder, string file_name)
+PCDSimpleIO::PCDSimpleIO (string pcd_data_folder, string file_name)
 {
 	pcd_data_folder_ = pcd_data_folder;
 	file_name_ = file_name;
-	cloud_ = pcl::PointCloud<pcl::PointXYZ>::Ptr(new pcl::PointCloud<pcl::PointXYZ>());
+	cloud_ = CloudXYZ::Ptr (new CloudXYZ());
 }
 
-bool PCDSimpleIO::getCloud(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud)
+bool PCDSimpleIO::getCloud (CloudXYZ::Ptr &cloud)
 {
-	if (pcl::io::loadPCDFile<pcl::PointXYZ> (pcd_data_folder_ + file_name_, *cloud) == -1) //* load the file
+	if (CloudXYZ (pcd_data_folder_ + file_name_, *cloud) == -1) //load the file
 	{
 		//Could not read pcd file
 		return false;
@@ -28,9 +28,9 @@ bool PCDSimpleIO::getCloud(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud)
 	}
 }
 
-pcl::PointCloud<pcl::PointXYZ>::Ptr PCDSimpleIO::getCloud2(bool &success)
+CloudXYZ::Ptr PCDSimpleIO::getCloud2 (bool &success)
 {
-	pcl::PointCloud<pcl::PointXYZ>::Ptr empty_cloud;
+	CloudXYZ::Ptr empty_cloud;
 	
 	if (pcl::io::loadPCDFile<pcl::PointXYZ> (pcd_data_folder_ + file_name_, *cloud_) == -1) //* load the file
 	{
@@ -46,22 +46,22 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr PCDSimpleIO::getCloud2(bool &success)
 	}
 }
 
-void PCDSimpleIO::setFileName(string file_name)
+void PCDSimpleIO::setFileName (string file_name)
 {
 	file_name_ = file_name;
 }
 
-string PCDSimpleIO::getFileName()
+string PCDSimpleIO::getFileName ()
 {
 	return file_name_;
 }
 
-void PCDSimpleIO::SetPcdDataFolder(string pcd_data_folder)
+void PCDSimpleIO::SetPcdDataFolder (string pcd_data_folder)
 {
 	pcd_data_folder_ = pcd_data_folder;
 }
 
-string PCDSimpleIO::getPcdDataFolder()
+string PCDSimpleIO::getPcdDataFolder ()
 {
 	return pcd_data_folder_;
 }
