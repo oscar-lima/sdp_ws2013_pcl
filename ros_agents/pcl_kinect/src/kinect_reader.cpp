@@ -41,7 +41,7 @@ CloudXYZ::Ptr KinectReader::getCloud()
 	return current_cloud_;
 }
 
-bool KinectReader::iscloud_unpublished_()
+bool KinectReader::isCloudUnpublished()
 {
 	return cloud_unpublished_;
 }
