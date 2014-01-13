@@ -12,18 +12,17 @@
 
 typedef pcl::PointCloud<pcl::PointXYZ> CloudXYZ;
 
-class Displayer {
+class Displayer
+{
 public:
 	Displayer();
 	~Displayer();
 	void setDisplayedCloud(CloudXYZ::Ptr &cloud);
 	CloudXYZ::Ptr getDisplayedCloud();
 	bool wasStopped();
-	
 private:
-	CloudXYZ::Ptr displayedCloud;
-	pcl::visualization::CloudViewer *viewer;
-	
+	CloudXYZ::Ptr displayed_cloud_;
+	pcl::visualization::CloudViewer *viewer_;	
 };
 
 #endif /* DISPLAYER_H_ */
