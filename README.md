@@ -1,15 +1,15 @@
 sdp_ws2013_pcl
 ==============
 
-Software Development Project (WS2013/2014) - PCL Group
+Software Development Project (WS2013/2014) - PCL Group (Pointcloud library)
+
+About this repository : This repository contains code related to PCL usage, the main idea behind this code is to agentify the components of the PCL library and at the same time construct and develop a useful pointcloud program.
+
+It contains both ros independant and ros dependant code, using ROS hydro and PCL 1.7 standalone version.
 
 
 SDP_PCL setup
 =============
-
-This wiki will help you to make use of this repository and the code it holds.
-
-It contains pointcloud examples and applications both ros independant and ros dependant.
 
 Documentation for installation avilable at:
 
@@ -17,17 +17,11 @@ Documentation for installation avilable at:
 		http://pointclouds.org/downloads/linux.html
 
 This steps were tested on kubuntu 12.10 and also there is knowledge about they work on ubuntu 12.04 LTS.
+Other Linux distributions might try this code as well but there is no available tests.
 
-1. install openni drivers
+1. install openni drivers (for kinect)
 
-go to this website and download openni according to your system:
-
-		http://www.openni.org/openni-sdk/
-
-Extract in a proper location in your computer and bash the install file inside
-
-		cd .../NITE-Bin-Dev-Linux-x64-v1.5.2.23/
-		sudo bash install.sh
+		Since pcl 1.7 openni drivers come with PCL library so you don't need to install them
 
 2. install pcl 1.7
 
@@ -99,11 +93,18 @@ source your bashrc
 		cd ~/ros_ws/sdp_pcl_ws/src
 		git clone git@github.com:mas-group/sdp_ws2013_pcl.git
 
+10. Compile
+
+		cd ~/ros_ws/sdp_pcl_ws
+		catkin_make
+
+You should be able to compile now with no errors.
+
 done! you can now test your installation.
 
 
-Testing the programs inside sdp_pcl
-===================================
+Testing sdp_pcl installation
+============================
 
 1. try the kinect simple example
 
@@ -121,27 +122,53 @@ Now you should be able to see live pointclouds streaming from kinect.
 
 2. try some other ros_independant pcl examples.
 
-		under construction...
+You can do the same procedure in general for running all ros independant examples
 
-4. run the main program : pcl_agent
+a. go to the location of the example
 
-compile the repository
+		cd ~/ros_ws/sdp_pcl_ws/src/sdp_ws2013_pcl/independent_of_ros/examples/
+		cd example_that_you_want_to_try
 
-		cd ~/ros_ws/sdp_pcl_ws
-		catkin_make
+b. create build folder and change to that location
 
-Now it should compile without errors... this point might be tricky, hopefully it will work. : )
+		mkdir build && cd build
 
-Connect the kinnect.
+c. cmake
 
-Launch the main project:
+		cmake ..
+
+You should see something like this:
+
+		Build files have been written to: ~/ros_ws/sdp_pcl_ws/src...
+
+d. make
+
+		make
+
+You should now be able to compile without errors
+
+e. run
+
+Change to build location folder (from previous step) if not there already...
+
+		cd .../build
+		./executable_name
+
+To know the executable_name you can type ./ and then "tab" you will see the suggestions.
+
+Another thing you can do is to open CMakeLists.txt and look for the "add executable" line, it will tell you the executable name.
+
+3. run the main program : pcl_agent (ros dependant)
+
+Connect the kinnect and launch the main project:
 
 		roslaunch pcl_agents pcl_agents.launch
 
-By now all the nodes should launch and a gui will show up in the screen waiting for commands.
-Now we will see how to use the software.
+By now all the nodes should launch and a gui should show up in the screen waiting for commands (reconfigure parameters).
 
-5. Usage of the main program : pcl_agent
+Now we will see how to use the gui.
+
+4. Usage of the main program : pcl_agent
 
 The project uses ROS and dynamic reconfigure, to use it you must create pipelines during runtime.
 
@@ -153,33 +180,37 @@ kinnect is publishing on the topic: /pcl_kinect/output_cloud
 
 So for example to create a simple pipeline to visualize the kinnect we will just make the pcl_viewer to subscribe to that topic.
 
-Similarly if we want to downsample the cloud first before visualizing it we can make the proper connections.
+This can be done by clicking on the left side of the gui on "pcl_viewer", and then write inside "viewer sub" the following:
 
-Table of topics:
+		/pcl_kinect/output_cloud
 
-	Node						Publishing topic
+Similarly if we want to downsample the cloud first before visualizing it, we can make the proper connections.
+
+
+Topics info:
 ----------------------------------------------------------------------------
-input:					|
 
-- pcd file reader		|	/pcl_file_reader/output_cloud
+input :
 
-- depth camera			|	/pcl_kinect/output_cloud
+- pcd file reader : /pcl_file_reader/output_cloud
 
-filters:				|
+- depth camera : /pcl_kinect/output_cloud
 
-- statistical outlier	|	/statisticaloutlierremoval_filter/output_cloud
+filters :
 
-- downsampling			|	/donwsampling_filter/output_cloud
+- statistical outlier : /statisticaloutlierremoval_filter/output_cloud
 
-- passtrough			|	/passtrough_filter/output_cloud
+- downsampling : /donwsampling_filter/output_cloud
 
-output:					|
+- passtrough : /passtrough_filter/output_cloud
 
-- viewer				|	does not apply
+output :
+
+- viewer : does not apply
 
 ---------------------------------------------------------------------------
 
-If you have doubts you can contact the developers with the subject [PCL_HELP] at:
+If you have questions you can contact the developers with the subject [PCL_HELP] at:
 
 
 Oscar Lima: 	olima_84@yahoo.com
