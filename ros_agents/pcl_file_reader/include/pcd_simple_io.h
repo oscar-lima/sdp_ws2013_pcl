@@ -11,21 +11,21 @@
 #include <cstring>
 
 using namespace std;
+typedef pcl::PointCloud<pcl::PointXYZ> CloudXYZ;
 
 class PCDSimpleIO
 {
 	public:
 	
-	string file_name;
-	string pcd_data_folder;
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;
+	string file_name_;
+	string pcd_data_folder_;
+	CloudXYZ::Ptr cloud_;
 
-	PCDSimpleIO(string _pcd_data_folder, string _file_name);
-	bool getCloud(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud);
-	pcl::PointCloud<pcl::PointXYZ>::Ptr getCloud2(bool &success);
-	void setFileName(string _file_name);
+	PCDSimpleIO(string pcd_data_folder, string file_name);
+	bool getCloud(CloudXYZ::Ptr &cloud);
+	CloudXYZ::Ptr getCloud2(bool &success);
+	void setFileName(string file_name);
 	string getFileName();
-	void SetPcdDataFolder(string _pcd_data_folder);
+	void SetPcdDataFolder(string pcd_data_folder);
 	string getPcdDataFolder();
-
 };

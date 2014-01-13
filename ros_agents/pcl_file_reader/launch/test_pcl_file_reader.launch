@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-	<!-- Launch file designed to test plc_file_reader agent, it will visualize a pointcloud -->
+	<!-- This launch file was designed to test plc_file_reader agent -->
 
 	<!-- pointcloud reader node -->
 	<node pkg="pcl_file_reader" type="pcl_file_reader" name="pcl_file_reader" output="screen" required="true"> </node>

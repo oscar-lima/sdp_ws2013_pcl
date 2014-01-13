@@ -1,40 +1,36 @@
 <?xml version="1.0"?>
 <package>
-  <name>pcl_file_reader</name>
-  <version>1.0.0</version>
-  <description>Pointcloud reader node</description>
+	<name>pcl_file_reader</name>
+	<version>1.0.0</version>
+	<description>
+		Pointcloud reader agent:
+		This rosnode will read a .pcd file and publish in the fixed topic
+		/pcl_file_reader/output_cloud
+	</description>
 
-  <maintainer email="olima_84@yahoo.com">Oscar Lima</maintainer>
+	<maintainer email="olima_84@yahoo.com">Oscar Lima</maintainer>
 
-  <license>BSD</license>
+	<license>BSD</license>
 
-  <build_depend>roslib</build_depend>
-  <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>pcl_conversions</build_depend>
-  <build_depend>pcl_ros</build_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>sensor_msgs</build_depend>
-  <run_depend>pcl_conversions</run_depend>
-  <run_depend>pcl_ros</run_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>sensor_msgs</run_depend>
-  <build_depend>libpcl-all-dev</build_depend>
-  <run_depend>libpcl-all</run_depend>
-  <build_depend>message_generation</build_depend>
-  <run_depend>message_runtime</run_depend>
+	<build_depend>roslib</build_depend>
+	<buildtool_depend>catkin</buildtool_depend>
+	<build_depend>pcl_conversions</build_depend>
+	<build_depend>pcl_ros</build_depend>
+	<build_depend>roscpp</build_depend>
+	<build_depend>sensor_msgs</build_depend>
+	<run_depend>pcl_conversions</run_depend>
+	<run_depend>pcl_ros</run_depend>
+	<run_depend>roscpp</run_depend>
+	<run_depend>sensor_msgs</run_depend>
+	<build_depend>libpcl-all-dev</build_depend>
+	<run_depend>libpcl-all</run_depend>
+	<build_depend>message_generation</build_depend>
+	<run_depend>message_runtime</run_depend>
   
-  <!--  dynamic reconfigure dependencies -->
-  <build_depend>dynamic_reconfigure</build_depend>
-  <build_depend>rospy</build_depend>
-  <run_depend>dynamic_reconfigure</run_depend>
-  <run_depend>rospy</run_depend>
-
-  <!-- The export tag contains other, unspecified, tags -->
-  <export>
-    <!-- You can specify that this package is a metapackage here: -->
-    <!-- <metapackage/> -->
-
-    <!-- Other tools can request additional information be placed here -->
-
-  </export>
+	<!--  dynamic reconfigure dependencies -->
+	<build_depend>dynamic_reconfigure</build_depend>
+	<build_depend>rospy</build_depend>
+	<run_depend>dynamic_reconfigure</run_depend>
+	<run_depend>rospy</run_depend>
+	<export> </export>
 </package>

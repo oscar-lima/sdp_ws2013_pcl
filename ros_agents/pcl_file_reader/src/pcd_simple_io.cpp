@@ -7,16 +7,16 @@
 
 #include "pcd_simple_io.h"
 
-PCDSimpleIO::PCDSimpleIO(string _pcd_data_folder, string _file_name)
+PCDSimpleIO::PCDSimpleIO(string pcd_data_folder, string file_name)
 {
-	PCDSimpleIO::pcd_data_folder = _pcd_data_folder;
-	PCDSimpleIO::file_name = _file_name;
-	PCDSimpleIO::cloud = pcl::PointCloud<pcl::PointXYZ>::Ptr(new pcl::PointCloud<pcl::PointXYZ>());
+	pcd_data_folder_ = pcd_data_folder;
+	file_name_ = file_name;
+	cloud_ = pcl::PointCloud<pcl::PointXYZ>::Ptr(new pcl::PointCloud<pcl::PointXYZ>());
 }
 
 bool PCDSimpleIO::getCloud(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud)
 {
-	if (pcl::io::loadPCDFile<pcl::PointXYZ> (pcd_data_folder + file_name, *cloud) == -1) //* load the file
+	if (pcl::io::loadPCDFile<pcl::PointXYZ> (pcd_data_folder_ + file_name_, *cloud) == -1) //* load the file
 	{
 		//Could not read pcd file
 		return false;
@@ -32,7 +32,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr PCDSimpleIO::getCloud2(bool &success)
 {
 	pcl::PointCloud<pcl::PointXYZ>::Ptr empty_cloud;
 	
-	if (pcl::io::loadPCDFile<pcl::PointXYZ> (pcd_data_folder + file_name, *PCDSimpleIO::cloud) == -1) //* load the file
+	if (pcl::io::loadPCDFile<pcl::PointXYZ> (pcd_data_folder_ + file_name_, *cloud_) == -1) //* load the file
 	{
 		success = false;
 		//Could not read pcd file
@@ -42,26 +42,26 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr PCDSimpleIO::getCloud2(bool &success)
 	{
 		success = true;
 		//Cloud loaded succesfully
-		return PCDSimpleIO::cloud;
+		return cloud_;
 	}
 }
 
-void PCDSimpleIO::setFileName(string _file_name)
+void PCDSimpleIO::setFileName(string file_name)
 {
-	PCDSimpleIO::file_name = _file_name;
+	file_name_ = file_name;
 }
 
 string PCDSimpleIO::getFileName()
 {
-	return PCDSimpleIO::file_name;
+	return file_name_;
 }
 
-void PCDSimpleIO::SetPcdDataFolder(string _pcd_data_folder)
+void PCDSimpleIO::SetPcdDataFolder(string pcd_data_folder)
 {
-	PCDSimpleIO::pcd_data_folder = _pcd_data_folder;
+	pcd_data_folder_ = pcd_data_folder;
 }
 
 string PCDSimpleIO::getPcdDataFolder()
 {
-	return PCDSimpleIO::pcd_data_folder;
+	return pcd_data_folder_;
 }
