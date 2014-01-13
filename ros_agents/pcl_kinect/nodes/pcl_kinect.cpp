@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 		if (kinect_live_->isCloudUnpublished())
 		{
 			pub_.publish(kinect_live_->getCloud());
-			}
+		}
 	}
 	delete kinect_live_;
 	return 0;
