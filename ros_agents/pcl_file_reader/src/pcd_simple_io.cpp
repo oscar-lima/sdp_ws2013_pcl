@@ -16,7 +16,7 @@ PCDSimpleIO::PCDSimpleIO (string pcd_data_folder, string file_name)
 
 bool PCDSimpleIO::getCloud (CloudXYZ::Ptr &cloud)
 {
-	if (CloudXYZ (pcd_data_folder_ + file_name_, *cloud) == -1) //load the file
+	if (pcl::io::loadPCDFile<pcl::PointXYZ> (pcd_data_folder_ + file_name_, *cloud) == -1) //load the file
 	{
 		//Could not read pcd file
 		return false;

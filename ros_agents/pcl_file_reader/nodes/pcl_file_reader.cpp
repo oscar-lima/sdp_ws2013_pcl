@@ -24,12 +24,12 @@ std::string g_pcd_filename;
 void dynamicReconfigureCallback (pcl_file_reader::pcl_file_readerConfig &config, uint32_t level)
 {
 	bool file_existance = false;
-	const std::string& filename = "";
-
+	std::basic_string<char> filename = "";
+	
 	//ROS_INFO("Reconfigure request received...");
 
-	g_pcd_path = config.g_pcd_path.c_str ();
-	g_pcd_filename = config.g_pcd_filename.c_str ();
+	g_pcd_path = config.pcd_path.c_str ();
+	g_pcd_filename = config.pcd_filename.c_str ();
 	
 	filename = g_pcd_path + g_pcd_filename;
 	
