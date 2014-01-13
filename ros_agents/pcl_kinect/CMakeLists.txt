@@ -8,10 +8,6 @@ find_package(catkin REQUIRED COMPONENTS
 	dynamic_reconfigure
 )
 
-generate_dynamic_reconfigure_options(
-  cfg/kinect.cfg
-)
-
 catkin_package( 
 				#INCLUDE_DIRS 
 				#LIBRARIES
