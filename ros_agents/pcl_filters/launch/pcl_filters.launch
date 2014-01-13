@@ -1,9 +1,16 @@
 <?xml version="1.0"?>
 <launch>
 
-	<include file="$(find pcl_filters)/launch/passthrough_agent.launch"/>
-	<include file="$(find pcl_filters)/launch/downsampling_agent.launch"/>
-	<include file="$(find pcl_filters)/launch/radiusoutlierremoval_agent.launch"/>
-	<include file="$(find pcl_filters)/launch/statisticaloutlierremoval_agent.launch"/>
+	<!-- Passthrough filter node -->
+	<node pkg="pcl_filters" type="passthrough_filter" name="passthrough_filter" output="screen" required="false"/>
+	
+	<!-- Downsampling filter node -->
+	<node pkg="pcl_filters" type="downsampling_filter" name="downsampling_filter" output="screen" required="false"/>
+	
+	<!-- Radius outlier filter node -->
+	<node pkg="pcl_filters" type="radiusoutlierremoval_filter" name="radiusoutlierremoval_filter" output="screen" required="false"/>
+
+	<!-- Statistical outlier filter node -->
+	<node pkg="pcl_filters" type="statisticaloutlierremoval_filter" name="statisticaloutlierremoval_filter" output="screen" required="false"/>
 
 </launch>
