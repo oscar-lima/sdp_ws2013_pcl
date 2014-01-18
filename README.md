@@ -25,6 +25,8 @@ Other Linux distributions might try this code as well but there is no available 
 
 2. install pcl 1.7
 
+NOTE: If you install ros hydro by using full desktop installation (sudo apt-get install ros-hydro-desktop-full) then it automatically installs standalone pcl version 1.7 and the following steps then can be omitted, if not then do:
+
 		sudo add-apt-repository ppa:v-launchpad-jochen-sprickerhof-de/pcl
 		sudo apt-get update
 		sudo apt-get install libpcl-all
@@ -209,6 +211,17 @@ output :
 - viewer : does not apply
 
 ---------------------------------------------------------------------------
+
+5. Launching many agents (nodes) of the same type
+
+It is possible to launch several viewers or filters of the same kind, by doing that we can filter on 3 axis at the same time. For doing that some steps are needed:
+
+a. launch the desired agent (node) using the following example command:
+
+		rosrun pcl_viewer pcl_viewer __name:=viewer2
+		
+b. relaunch dynamic reconfigure
+
 
 If you have questions you can contact the developers with the subject [PCL_HELP] at:
 
