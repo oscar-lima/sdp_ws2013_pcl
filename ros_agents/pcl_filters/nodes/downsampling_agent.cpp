@@ -7,7 +7,7 @@
 typedef pcl::PointCloud<pcl::PointXYZ>::Ptr CloudXYZ;
 ros::Publisher pub_;
 ros::Subscriber sub_;
-DownsamplingFilter test_;
+DownsamplingFilter filter_;
 double v_width_;
 double v_length_;
 double v_height_;
@@ -44,10 +44,10 @@ void dynamicReconfigureCallback(pcl_filters::downsamplingConfig &config, uint32_
 
 void cloudCallback(CloudXYZ src_cloud)
 {
-	test_.setVoxelWidth(v_width_);
-	test_.setVoxelLength(v_length_);
-	test_.setVoxelHeight(v_height_);
-	test_.applyFilter(src_cloud,src_cloud);
+	filter_.setVoxelWidth(v_width_);
+	filter_.setVoxelLength(v_length_);
+	filter_.setVoxelHeight(v_height_);
+	filter_.applyFilter(src_cloud,src_cloud);
 	pub_.publish(src_cloud); 
 }
 

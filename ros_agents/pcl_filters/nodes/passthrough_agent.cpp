@@ -8,7 +8,7 @@
 typedef pcl::PointCloud<pcl::PointXYZ>::Ptr CloudXYZ;
 ros::Publisher pub_;
 ros::Subscriber sub_;
-PassthroughFilter test_;
+PassthroughFilter filter_;
 std::string axis_;
 double min_range_;
 double max_range_;
@@ -47,11 +47,11 @@ void dynamicReconfigureCallback(pcl_filters::passthroughConfig &config, uint32_t
 
 void cloudCallback(CloudXYZ src_cloud)
 {
-	test_.cloudRangesFind(src_cloud);
-	test_.setFilterAxis(axis_);
-	test_.setMinRange(min_range_);
-	test_.setMaxRange(max_range_);
-	test_.applyFilter(src_cloud,src_cloud);
+	filter_.cloudRangesFind(src_cloud);
+	filter_.setFilterAxis(axis_);
+	filter_.setMinRange(min_range_);
+	filter_.setMaxRange(max_range_);
+	filter_.applyFilter(src_cloud,src_cloud);
 	pub_.publish(src_cloud); 
 }
 

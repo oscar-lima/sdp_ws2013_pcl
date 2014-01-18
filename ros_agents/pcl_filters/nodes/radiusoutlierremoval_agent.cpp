@@ -7,7 +7,7 @@
 typedef pcl::PointCloud<pcl::PointXYZ>::Ptr CloudXYZ;
 ros::Publisher pub_;
 ros::Subscriber sub_;
-RadiusOutlierFilter test_;
+RadiusOutlierFilter filter_;
 int min_neighbours_;
 double search_radius_;
 std::string radiusoutlier_sub_;
@@ -39,9 +39,10 @@ void dynamicReconfigureCallback(pcl_filters::radiusoutlierremovalConfig &config,
 }
 void cloudCallback(CloudXYZ src_cloud)
 {
-	test_.setMinNeighbours(min_neighbours_);
-	test_.setSearchRadius(search_radius_);
-	test_.applyFilter(src_cloud,src_cloud);
+	ROS_INFO("cloud_callback");
+	filter_.setMinNeighbours(min_neighbours_);
+	filter_.setSearchRadius(search_radius_);
+	filter_.applyFilter(src_cloud,src_cloud);
 	pub_.publish(src_cloud); 
 }
 

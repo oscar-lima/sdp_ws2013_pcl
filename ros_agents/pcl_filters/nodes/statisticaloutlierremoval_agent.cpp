@@ -7,7 +7,7 @@
 typedef pcl::PointCloud<pcl::PointXYZ>::Ptr CloudXYZ;
 ros::Publisher pub_;
 ros::Subscriber sub_;
-StatisticalOutlierFilter test_;
+StatisticalOutlierFilter filter_;
 int neighbours_;
 double standard_deviation_;
 std::string statisticaloutlierremoval_sub_;
@@ -40,9 +40,9 @@ void dynamicReconfigureCallback(pcl_filters::statisticaloutlierremovalConfig &co
 void cloudCallback(CloudXYZ src_cloud)
 {
 	//point_cloud dest_cloud
-	test_.setNeighbours(neighbours_);
-	test_.setStandardDeviation(standard_deviation_);
-	test_.applyFilter(src_cloud,src_cloud);
+	filter_.setNeighbours(neighbours_);
+	filter_.setStandardDeviation(standard_deviation_);
+	filter_.applyFilter(src_cloud,src_cloud);
 	pub_.publish(src_cloud); 
 }
 

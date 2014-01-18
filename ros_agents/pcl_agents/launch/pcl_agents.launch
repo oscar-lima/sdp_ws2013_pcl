@@ -14,7 +14,7 @@
 	<node pkg="pcl_viewer" type="pcl_viewer" name="pcl_viewer" output="screen" required="true"></node>
 
 	<!-- dynamic reconfigure -->
-	<node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure" required="true"> </node>
+	<node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure" required="false"> </node>
 
 	<!-- rqt_graph to see the pipeline -->
 	<node pkg="rqt_graph" type="rqt_graph" name="rqt_graph" required="false"> </node>
