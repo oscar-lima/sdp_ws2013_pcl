@@ -245,7 +245,7 @@ Hochschule Bonn Rhein Sieg
 
 under the supervision of:
 
-Prof. Dr. Eng. Gerard Kraetzchmar
+Prof. Dr. Eng. Gerard Kraetzschmar
 
 Teacher Assistant: Ms.C. Frederik Hegger
 
